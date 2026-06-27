@@ -1,0 +1,150 @@
+aid: upload-post
+url: https://raw.githubusercontent.com/api-evangelist/upload-post/refs/heads/main/apis.yml
+name: Upload-Post
+kind: company
+description: Upload-Post is a universal social media publishing API that lets developers
+  publish videos, photos, and text posts to TikTok, Instagram, YouTube, LinkedIn,
+  Facebook, X (Twitter), Threads, Pinterest, Bluesky, Reddit, Discord, Telegram, and
+  Google Business Profile through a single REST interface, with managed user profiles,
+  OAuth account linking, scheduling, and cross-platform analytics.
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+tags:
+- Social Media
+- Publishing
+- Video
+- Content
+- Cross Posting
+created: '2026-06-25'
+modified: '2026-06-25'
+specificationVersion: '0.19'
+apis:
+- aid: upload-post:upload-post-upload-video-api
+  name: Upload-Post Upload Video API
+  tags:
+  - Video
+  - Publishing
+  - Social Media
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://docs.upload-post.com/api/reference/
+  baseURL: https://api.upload-post.com/api
+  properties:
+  - url: https://docs.upload-post.com/
+    type: Documentation
+  - url: https://docs.upload-post.com/api/reference/
+    type: APIReference
+  - url: openapi/upload-post-openapi.yml
+    type: OpenAPI
+  - url: collections/upload-post.postman_collection.json
+    type: PostmanCollection
+  - url: collections/upload-post.opencollection.json
+    type: OpenCollection
+  description: Publishes video posts to TikTok, Instagram, YouTube, LinkedIn, Facebook,
+    X (Twitter), Threads, Pinterest, Bluesky, Reddit, Discord, and Telegram via a single
+    multipart upload, with synchronous and asynchronous (request_id) modes and scheduling.
+- aid: upload-post:upload-post-upload-photos-api
+  name: Upload-Post Upload Photos API
+  tags:
+  - Photos
+  - Carousel
+  - Publishing
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://docs.upload-post.com/api/reference/
+  baseURL: https://api.upload-post.com/api
+  properties:
+  - url: https://docs.upload-post.com/
+    type: Documentation
+  - url: https://docs.upload-post.com/api/reference/
+    type: APIReference
+  - url: openapi/upload-post-openapi.yml
+    type: OpenAPI
+  - url: collections/upload-post.postman_collection.json
+    type: PostmanCollection
+  - url: collections/upload-post.opencollection.json
+    type: OpenCollection
+  description: Publishes single photos and image carousels to Instagram, LinkedIn,
+    Facebook, X (Twitter), TikTok, Threads, Pinterest, and Bluesky using multipart
+    photos[] uploads with title and description fields.
+- aid: upload-post:upload-post-upload-text-api
+  name: Upload-Post Upload Text API
+  tags:
+  - Text
+  - Publishing
+  - Social Media
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://docs.upload-post.com/api/reference/
+  baseURL: https://api.upload-post.com/api
+  properties:
+  - url: https://docs.upload-post.com/
+    type: Documentation
+  - url: https://docs.upload-post.com/api/reference/
+    type: APIReference
+  - url: openapi/upload-post-openapi.yml
+    type: OpenAPI
+  - url: collections/upload-post.postman_collection.json
+    type: PostmanCollection
+  - url: collections/upload-post.opencollection.json
+    type: OpenCollection
+  description: Creates and distributes text-only posts across supported social platforms
+    such as X (Twitter), Threads, LinkedIn, Facebook, and Bluesky.
+- aid: upload-post:upload-post-profiles-users-api
+  name: Upload-Post Profiles and Users API
+  tags:
+  - Users
+  - Profiles
+  - OAuth
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://docs.upload-post.com/api/user-profiles/
+  baseURL: https://api.upload-post.com/api
+  properties:
+  - url: https://docs.upload-post.com/api/user-profiles/
+    type: Documentation
+  - url: https://docs.upload-post.com/api/reference/
+    type: APIReference
+  - url: openapi/upload-post-openapi.yml
+    type: OpenAPI
+  - url: collections/upload-post.postman_collection.json
+    type: PostmanCollection
+  - url: collections/upload-post.opencollection.json
+    type: OpenCollection
+  description: Creates, lists, and deletes managed user profiles, generates single-use
+    JWT URLs for end users to link their own social accounts, and validates those tokens.
+- aid: upload-post:upload-post-analytics-api
+  name: Upload-Post Analytics API
+  tags:
+  - Analytics
+  - Impressions
+  - Metrics
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://docs.upload-post.com/api/reference/
+  baseURL: https://api.upload-post.com/api
+  properties:
+  - url: https://docs.upload-post.com/
+    type: Documentation
+  - url: https://docs.upload-post.com/api/reference/
+    type: APIReference
+  - url: openapi/upload-post-openapi.yml
+    type: OpenAPI
+  - url: collections/upload-post.postman_collection.json
+    type: PostmanCollection
+  - url: collections/upload-post.opencollection.json
+    type: OpenCollection
+  description: Retrieves per-profile performance metrics, aggregated total impressions
+    across platforms, and per-post analytics by request_id or platform post ID.
+common:
+- type: GitHubOrganization
+  url: https://github.com/Upload-Post
+- type: LinkedIn
+  url: https://www.linkedin.com/company/upload-post
+- type: Website
+  url: https://www.upload-post.com/
+- type: Documentation
+  url: https://docs.upload-post.com/
+- type: Plans
+  url: plans/upload-post-plans-pricing.yml
+- type: RateLimits
+  url: rate-limits/upload-post-rate-limits.yml
+- type: FinOps
+  url: finops/upload-post-finops.yml
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

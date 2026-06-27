@@ -1,0 +1,89 @@
+specification: API Commons Plans
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/Plans
+provider: Upload-Post
+providerId: upload-post
+created: '2026-06-25'
+modified: '2026-06-25'
+reconciled: false
+tags:
+- Social Media
+- Publishing
+- Video
+- Content
+- Cross Posting
+- Plans
+description: >-
+  Upload-Post offers a free tier and paid subscription plans. The free tier
+  provides 10 uploads per month and a limited number of managed profiles. Paid
+  plans are billed monthly (with discounted annual billing), unlock API access
+  and unlimited uploads, and scale primarily by the number of connected
+  profiles (social accounts). Exact tier names, profile counts, and prices are
+  set on the Upload-Post pricing page and are not fully reconciled here.
+notes: >-
+  Pricing reported from public pages varies between comparison sources;
+  verify current tier names, profile limits, and prices on the Upload-Post
+  pricing page during reconciliation. The entry paid plan was reported around
+  $16/month billed annually for 5 profiles.
+sources:
+- https://www.upload-post.com/
+- https://app.upload-post.com/pricing
+- https://docs.upload-post.com/api/overview/
+plans:
+- id: upload-post-free
+  name: Free
+  type: free
+  description: >-
+    No-cost tier for trying the service, with a limited monthly upload
+    allowance and no credit card required.
+  entries:
+  - label: Monthly Uploads
+    name: free_uploads
+    type: free
+    metric: uploads
+    limit: 10
+    timeFrame: month
+    geo: global
+    unit: 1
+    price: $0
+    userMultiplied: false
+  elements:
+  - name: Multi-Platform Publishing
+  - name: Managed User Profiles
+- id: upload-post-paid
+  name: Paid (Subscription)
+  type: subscription
+  description: >-
+    Paid subscription unlocking API access and unlimited uploads, scaling by
+    the number of connected profiles. Entry pricing was reported around
+    $16/month billed annually for 5 profiles; higher tiers add more profiles.
+  entries:
+  - label: Subscription
+    name: paid_subscription
+    type: flat
+    metric: profiles
+    limit: -1
+    timeFrame: month
+    geo: global
+    unit: 1
+    price: from ~$16/month (billed annually); see pricing page
+    userMultiplied: false
+  - label: Uploads
+    name: paid_uploads
+    type: flat
+    metric: uploads
+    limit: -1
+    timeFrame: month
+    geo: global
+    unit: 1
+    price: unlimited on paid plans
+    userMultiplied: false
+  elements:
+  - name: API Access
+  - name: Unlimited Uploads
+  - name: Multi-Platform Publishing
+  - name: Scheduling
+  - name: Analytics
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

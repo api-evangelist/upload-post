@@ -1,0 +1,142 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Upload-Post API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "Apikey {{apiKey}}",
+      "in": "header"
+    }
+  },
+  "items": [
+    {
+      "info": { "name": "Upload", "type": "folder" },
+      "items": [
+        {
+          "info": { "name": "Upload a video post", "type": "http" },
+          "http": {
+            "method": "POST",
+            "url": "https://api.upload-post.com/api/upload",
+            "body": { "type": "multipart-form", "data": [] }
+          },
+          "docs": "Publishes a video to one or more platforms via multipart/form-data (user, platform[], title, video)."
+        },
+        {
+          "info": { "name": "Upload photos or carousel", "type": "http" },
+          "http": {
+            "method": "POST",
+            "url": "https://api.upload-post.com/api/upload_photos",
+            "body": { "type": "multipart-form", "data": [] }
+          },
+          "docs": "Publishes photos or an image carousel via multipart/form-data (user, platform[], title, description, photos[])."
+        },
+        {
+          "info": { "name": "Create a text post", "type": "http" },
+          "http": {
+            "method": "POST",
+            "url": "https://api.upload-post.com/api/upload_text",
+            "body": { "type": "multipart-form", "data": [] }
+          },
+          "docs": "Creates a text-only post across supported platforms (user, platform[], title)."
+        }
+      ]
+    },
+    {
+      "info": { "name": "Upload Management", "type": "folder" },
+      "items": [
+        {
+          "info": { "name": "Get upload/job status", "type": "http" },
+          "http": {
+            "method": "GET",
+            "url": "https://api.upload-post.com/api/uploadposts/status"
+          },
+          "docs": "Returns status by request_id (async upload) or job_id (scheduled post)."
+        },
+        {
+          "info": { "name": "List upload history", "type": "http" },
+          "http": {
+            "method": "GET",
+            "url": "https://api.upload-post.com/api/uploadposts/history"
+          },
+          "docs": "Paginated, filterable upload history."
+        }
+      ]
+    },
+    {
+      "info": { "name": "Users", "type": "folder" },
+      "items": [
+        {
+          "info": { "name": "List user profiles", "type": "http" },
+          "http": { "method": "GET", "url": "https://api.upload-post.com/api/uploadposts/users" },
+          "docs": "Retrieves all user profiles under the API key."
+        },
+        {
+          "info": { "name": "Create a user profile", "type": "http" },
+          "http": {
+            "method": "POST",
+            "url": "https://api.upload-post.com/api/uploadposts/users",
+            "body": { "type": "json", "data": "{\n  \"username\": \"test\"\n}" }
+          },
+          "docs": "Creates a new profile identified by a unique username."
+        },
+        {
+          "info": { "name": "Delete a user profile", "type": "http" },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.upload-post.com/api/uploadposts/users",
+            "body": { "type": "json", "data": "{\n  \"username\": \"test\"\n}" }
+          },
+          "docs": "Removes a profile and its social connections."
+        },
+        {
+          "info": { "name": "Get a user profile", "type": "http" },
+          "http": { "method": "GET", "url": "https://api.upload-post.com/api/uploadposts/users/{username}" },
+          "docs": "Fetches a single profile by username."
+        },
+        {
+          "info": { "name": "Generate JWT linking URL", "type": "http" },
+          "http": {
+            "method": "POST",
+            "url": "https://api.upload-post.com/api/uploadposts/users/generate-jwt",
+            "body": { "type": "json", "data": "{\n  \"username\": \"test\",\n  \"redirect_url\": \"https://example.com/done\"\n}" }
+          },
+          "docs": "Creates a single-use URL for an end user to link their social accounts."
+        },
+        {
+          "info": { "name": "Validate JWT token", "type": "http" },
+          "http": { "method": "POST", "url": "https://api.upload-post.com/api/uploadposts/users/validate-jwt" },
+          "docs": "Validates a JWT token passed in the Authorization header."
+        },
+        {
+          "info": { "name": "Validate API key (me)", "type": "http" },
+          "http": { "method": "GET", "url": "https://api.upload-post.com/api/uploadposts/me" },
+          "docs": "Validates the API key and returns account info."
+        }
+      ]
+    },
+    {
+      "info": { "name": "Analytics", "type": "folder" },
+      "items": [
+        {
+          "info": { "name": "Get profile metrics", "type": "http" },
+          "http": { "method": "GET", "url": "https://api.upload-post.com/api/analytics/{profile_username}" },
+          "docs": "Retrieves performance metrics for a profile."
+        },
+        {
+          "info": { "name": "Get total impressions", "type": "http" },
+          "http": { "method": "GET", "url": "https://api.upload-post.com/api/uploadposts/total-impressions/{profile_username}" },
+          "docs": "Aggregated impressions across platforms for a profile."
+        },
+        {
+          "info": { "name": "Get post analytics", "type": "http" },
+          "http": { "method": "GET", "url": "https://api.upload-post.com/api/uploadposts/post-analytics/{request_id}" },
+          "docs": "Per-post analytics by request_id (or platform_post_id query param)."
+        }
+      ]
+    }
+  ]
+}

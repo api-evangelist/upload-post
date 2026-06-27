@@ -1,0 +1,71 @@
+aid: upload-post
+name: Upload-Post
+review:
+  question: Does Upload-Post expose a documented public WebSocket API?
+  answer: false
+  date: '2026-06-25'
+  reviewer: API Evangelist
+  asyncapiSpecCreated: false
+  asyncapiScopeNote: |
+    No AsyncAPI document was created. Upload-Post exposes only REST (HTTPS)
+    endpoints under https://api.upload-post.com/api. There is no documented
+    WebSocket surface, and no Server-Sent Events (SSE) streaming endpoint is
+    documented. Asynchronous uploads are handled via a request_id that is
+    polled through the REST GET /uploadposts/status endpoint, not via a
+    streaming transport, so there is no eventing surface to model.
+findings:
+  summary: |
+    Upload-Post does not publish a documented public WebSocket API. The
+    platform is a multipart/form-data REST API exposed under
+    https://api.upload-post.com/api, authenticated with an
+    `Authorization: Apikey <KEY>` header. Long-running uploads are made
+    asynchronous via an `async_upload` flag that returns a `request_id`,
+    whose progress is retrieved by polling GET /uploadposts/status. No
+    realtime, bidirectional, or streaming WebSocket (ws:// or wss://)
+    endpoint is documented for uploads, status, or analytics.
+  transports:
+    - protocol: REST
+      scheme: https
+      baseURL: https://api.upload-post.com/api
+      documented: true
+    - protocol: WebSocket
+      scheme: wss
+      documented: false
+      note: No WebSocket endpoint is documented in Upload-Post's API reference or any product page as of the review date.
+  endpointsConfirmedRest:
+    - POST   https://api.upload-post.com/api/upload
+    - POST   https://api.upload-post.com/api/upload_photos
+    - POST   https://api.upload-post.com/api/upload_text
+    - GET    https://api.upload-post.com/api/uploadposts/status
+    - GET    https://api.upload-post.com/api/uploadposts/history
+    - GET    https://api.upload-post.com/api/uploadposts/users
+    - POST   https://api.upload-post.com/api/uploadposts/users
+    - DELETE https://api.upload-post.com/api/uploadposts/users
+    - GET    https://api.upload-post.com/api/uploadposts/users/{username}
+    - POST   https://api.upload-post.com/api/uploadposts/users/generate-jwt
+    - POST   https://api.upload-post.com/api/uploadposts/users/validate-jwt
+    - GET    https://api.upload-post.com/api/uploadposts/me
+    - GET    https://api.upload-post.com/api/analytics/{profile_username}
+    - GET    https://api.upload-post.com/api/uploadposts/total-impressions/{profile_username}
+    - GET    https://api.upload-post.com/api/uploadposts/post-analytics/{request_id}
+sources:
+  - url: https://docs.upload-post.com/
+    type: Documentation
+    note: Overview lists REST base URL https://api.upload-post.com/api; no WebSocket mentioned.
+  - url: https://docs.upload-post.com/api/reference/
+    type: APIReference
+    note: All documented endpoints are HTTPS REST with multipart/form-data uploads.
+  - url: https://docs.upload-post.com/api/user-profiles/
+    type: Documentation
+    note: User profile and JWT account-linking endpoints are REST; no streaming surface.
+  - url: https://docs.upload-post.com/quickstart/
+    type: Documentation
+    note: Quickstart shows curl multipart POSTs with Authorization Apikey header; no WebSocket.
+actions:
+  asyncapiPath: null
+  apisYmlUpdated: true
+  reason: |
+    No WebSocket or SSE protocol surface exists. Upload-Post is a pure REST
+    API; asynchronous behavior is poll-based via request_id and GET
+    /uploadposts/status. No AsyncAPI document was authored because there is
+    no eventing or streaming transport to model.

@@ -1,0 +1,63 @@
+specification: API Commons Rate Limits
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/RateLimits
+provider: Upload-Post
+providerId: upload-post
+created: '2026-06-25'
+modified: '2026-06-25'
+reconciled: false
+tags:
+- Social Media
+- Publishing
+- Video
+- Content
+- Cross Posting
+- Rate Limiting
+- Quotas
+- Throttling
+description: >-
+  Upload-Post primarily meters usage by a monthly upload allowance that varies
+  by plan (10 uploads/month on the free tier; unlimited on paid plans) and by
+  the number of connected profiles. Per-platform publishing is additionally
+  subject to the underlying social network's own API limits and content
+  policies. Specific HTTP request-per-minute throttling values are not
+  documented publicly and are not reconciled in this artifact.
+notes: >-
+  Verify current monthly upload allowances, profile caps, and any request-rate
+  throttling in the Upload-Post dashboard and documentation during
+  reconciliation. Downstream limits enforced by TikTok, Instagram, YouTube,
+  LinkedIn, and other connected platforms also apply.
+sources:
+- https://docs.upload-post.com/api/overview/
+- https://www.upload-post.com/
+responseCodes:
+  throttled: 429
+limits:
+- name: Monthly Uploads (Free)
+  scope: account
+  metric: uploads
+  limit: 10
+  notes: Free tier allowance; resets monthly.
+- name: Monthly Uploads (Paid)
+  scope: account
+  metric: uploads
+  limit: unlimited
+  notes: Paid subscription plans remove the monthly upload cap.
+- name: Connected Profiles
+  scope: account
+  metric: profiles
+  limit: see provider documentation
+  notes: Number of connected profiles (social accounts) is capped per plan tier.
+- name: Per-Platform Limits
+  scope: platform
+  metric: requests
+  limit: see platform documentation
+  notes: Downstream social networks enforce their own publishing rate limits and policies.
+policies:
+- name: Plan-Based Allowances
+  description: Upload allowances and profile caps increase with paid plan tiers.
+- name: Backoff Strategy
+  description: Clients should implement exponential backoff with jitter and honor Retry-After on 429 responses.
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

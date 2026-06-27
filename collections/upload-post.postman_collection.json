@@ -1,0 +1,211 @@
+{
+  "info": {
+    "_postman_id": "a1b2c3d4-upload-post-collection-0001",
+    "name": "Upload-Post API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Universal social media publishing API for videos, photos, and text posts across TikTok, Instagram, YouTube, LinkedIn, Facebook, X, Threads, Pinterest, Bluesky, Reddit, Discord, Telegram, and Google Business Profile.\n\nAuthentication: Authorization: Apikey YOUR_API_KEY",
+      "type": "text/plain"
+    }
+  },
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      { "key": "key", "value": "Authorization" },
+      { "key": "value", "value": "Apikey {{apiKey}}" },
+      { "key": "in", "value": "header" }
+    ]
+  },
+  "variable": [
+    { "type": "string", "value": "https://api.upload-post.com/api", "key": "baseUrl" },
+    { "type": "string", "value": "", "key": "apiKey" }
+  ],
+  "item": [
+    {
+      "name": "Upload",
+      "description": { "content": "Publish video, photo, and text content.", "type": "text/plain" },
+      "item": [
+        {
+          "name": "Upload a video post",
+          "request": {
+            "method": "POST",
+            "url": { "raw": "{{baseUrl}}/upload", "host": ["{{baseUrl}}"], "path": ["upload"] },
+            "header": [],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                { "key": "user", "value": "test", "type": "text" },
+                { "key": "platform[]", "value": "tiktok", "type": "text" },
+                { "key": "title", "value": "My First Video", "type": "text" },
+                { "key": "video", "type": "file", "src": [] }
+              ]
+            },
+            "description": "Publishes a video to one or more platforms (multipart/form-data)."
+          }
+        },
+        {
+          "name": "Upload photos or carousel",
+          "request": {
+            "method": "POST",
+            "url": { "raw": "{{baseUrl}}/upload_photos", "host": ["{{baseUrl}}"], "path": ["upload_photos"] },
+            "header": [],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                { "key": "user", "value": "test", "type": "text" },
+                { "key": "platform[]", "value": "instagram", "type": "text" },
+                { "key": "title", "value": "My First Post", "type": "text" },
+                { "key": "description", "value": "Hello!", "type": "text" },
+                { "key": "photos[]", "type": "file", "src": [] }
+              ]
+            },
+            "description": "Publishes one or more photos or an image carousel (multipart/form-data)."
+          }
+        },
+        {
+          "name": "Create a text post",
+          "request": {
+            "method": "POST",
+            "url": { "raw": "{{baseUrl}}/upload_text", "host": ["{{baseUrl}}"], "path": ["upload_text"] },
+            "header": [],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                { "key": "user", "value": "test", "type": "text" },
+                { "key": "platform[]", "value": "x", "type": "text" },
+                { "key": "title", "value": "Hello world", "type": "text" }
+              ]
+            },
+            "description": "Creates a text-only post across supported platforms."
+          }
+        }
+      ]
+    },
+    {
+      "name": "Upload Management",
+      "item": [
+        {
+          "name": "Get upload/job status",
+          "request": {
+            "method": "GET",
+            "url": { "raw": "{{baseUrl}}/uploadposts/status?request_id=", "host": ["{{baseUrl}}"], "path": ["uploadposts", "status"], "query": [ { "key": "request_id", "value": "" }, { "key": "job_id", "value": "", "disabled": true } ] },
+            "header": [],
+            "description": "Returns status by request_id (async upload) or job_id (scheduled post)."
+          }
+        },
+        {
+          "name": "List upload history",
+          "request": {
+            "method": "GET",
+            "url": { "raw": "{{baseUrl}}/uploadposts/history", "host": ["{{baseUrl}}"], "path": ["uploadposts", "history"] },
+            "header": [],
+            "description": "Paginated, filterable upload history."
+          }
+        }
+      ]
+    },
+    {
+      "name": "Users",
+      "item": [
+        {
+          "name": "List user profiles",
+          "request": {
+            "method": "GET",
+            "url": { "raw": "{{baseUrl}}/uploadposts/users", "host": ["{{baseUrl}}"], "path": ["uploadposts", "users"] },
+            "header": [],
+            "description": "Retrieves all user profiles under the API key."
+          }
+        },
+        {
+          "name": "Create a user profile",
+          "request": {
+            "method": "POST",
+            "url": { "raw": "{{baseUrl}}/uploadposts/users", "host": ["{{baseUrl}}"], "path": ["uploadposts", "users"] },
+            "header": [ { "key": "Content-Type", "value": "application/json" } ],
+            "body": { "mode": "raw", "raw": "{\n  \"username\": \"test\"\n}", "options": { "raw": { "language": "json" } } },
+            "description": "Creates a new profile identified by a unique username."
+          }
+        },
+        {
+          "name": "Delete a user profile",
+          "request": {
+            "method": "DELETE",
+            "url": { "raw": "{{baseUrl}}/uploadposts/users", "host": ["{{baseUrl}}"], "path": ["uploadposts", "users"] },
+            "header": [ { "key": "Content-Type", "value": "application/json" } ],
+            "body": { "mode": "raw", "raw": "{\n  \"username\": \"test\"\n}", "options": { "raw": { "language": "json" } } },
+            "description": "Removes a profile and its social connections."
+          }
+        },
+        {
+          "name": "Get a user profile",
+          "request": {
+            "method": "GET",
+            "url": { "raw": "{{baseUrl}}/uploadposts/users/:username", "host": ["{{baseUrl}}"], "path": ["uploadposts", "users", ":username"], "variable": [ { "key": "username", "value": "test" } ] },
+            "header": [],
+            "description": "Fetches a single profile by username."
+          }
+        },
+        {
+          "name": "Generate JWT linking URL",
+          "request": {
+            "method": "POST",
+            "url": { "raw": "{{baseUrl}}/uploadposts/users/generate-jwt", "host": ["{{baseUrl}}"], "path": ["uploadposts", "users", "generate-jwt"] },
+            "header": [ { "key": "Content-Type", "value": "application/json" } ],
+            "body": { "mode": "raw", "raw": "{\n  \"username\": \"test\",\n  \"redirect_url\": \"https://example.com/done\"\n}", "options": { "raw": { "language": "json" } } },
+            "description": "Creates a single-use URL for an end user to link their social accounts."
+          }
+        },
+        {
+          "name": "Validate JWT token",
+          "request": {
+            "method": "POST",
+            "url": { "raw": "{{baseUrl}}/uploadposts/users/validate-jwt", "host": ["{{baseUrl}}"], "path": ["uploadposts", "users", "validate-jwt"] },
+            "header": [],
+            "description": "Validates a JWT token passed in the Authorization header."
+          }
+        },
+        {
+          "name": "Validate API key (me)",
+          "request": {
+            "method": "GET",
+            "url": { "raw": "{{baseUrl}}/uploadposts/me", "host": ["{{baseUrl}}"], "path": ["uploadposts", "me"] },
+            "header": [],
+            "description": "Validates the API key and returns account info."
+          }
+        }
+      ]
+    },
+    {
+      "name": "Analytics",
+      "item": [
+        {
+          "name": "Get profile metrics",
+          "request": {
+            "method": "GET",
+            "url": { "raw": "{{baseUrl}}/analytics/:profile_username", "host": ["{{baseUrl}}"], "path": ["analytics", ":profile_username"], "variable": [ { "key": "profile_username", "value": "test" } ] },
+            "header": [],
+            "description": "Retrieves performance metrics for a profile."
+          }
+        },
+        {
+          "name": "Get total impressions",
+          "request": {
+            "method": "GET",
+            "url": { "raw": "{{baseUrl}}/uploadposts/total-impressions/:profile_username", "host": ["{{baseUrl}}"], "path": ["uploadposts", "total-impressions", ":profile_username"], "variable": [ { "key": "profile_username", "value": "test" } ] },
+            "header": [],
+            "description": "Aggregated impressions across platforms for a profile."
+          }
+        },
+        {
+          "name": "Get post analytics",
+          "request": {
+            "method": "GET",
+            "url": { "raw": "{{baseUrl}}/uploadposts/post-analytics/:request_id", "host": ["{{baseUrl}}"], "path": ["uploadposts", "post-analytics", ":request_id"], "variable": [ { "key": "request_id", "value": "" } ] },
+            "header": [],
+            "description": "Per-post analytics by request_id (or platform_post_id query param)."
+          }
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,571 @@
+openapi: 3.0.1
+info:
+  title: Upload-Post API
+  description: >-
+    The Upload-Post API is a universal social media publishing interface for
+    publishing videos, photos, and text posts to TikTok, Instagram, YouTube,
+    LinkedIn, Facebook, X (Twitter), Threads, Pinterest, Bluesky, Reddit,
+    Discord, Telegram, and Google Business Profile. It also manages user
+    profiles, single-use JWT account-linking URLs, upload status/history, and
+    cross-platform analytics.
+  termsOfService: https://www.upload-post.com/terms
+  contact:
+    name: Upload-Post Support
+    url: https://www.upload-post.com/
+  version: '1.0'
+servers:
+  - url: https://api.upload-post.com/api
+    description: Upload-Post production API
+security:
+  - ApikeyAuth: []
+tags:
+  - name: Upload
+    description: Publish video, photo, and text content to social platforms.
+  - name: Upload Management
+    description: Check upload status and retrieve upload history.
+  - name: Users
+    description: Manage user profiles and social account linking.
+  - name: Analytics
+    description: Retrieve impressions and per-post performance metrics.
+paths:
+  /upload:
+    post:
+      operationId: uploadVideo
+      tags:
+        - Upload
+      summary: Upload a video post
+      description: >-
+        Publishes a video to one or more social platforms for a given user
+        profile. Sent as multipart/form-data. Supports synchronous and
+        asynchronous (async_upload=true returns a request_id) operation.
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/UploadVideoRequest'
+      responses:
+        '200':
+          description: Upload accepted or completed.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UploadResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /upload_photos:
+    post:
+      operationId: uploadPhotos
+      tags:
+        - Upload
+      summary: Upload photos or an image carousel
+      description: >-
+        Publishes one or more photos (or an image carousel) to one or more
+        social platforms for a given user profile. Sent as multipart/form-data.
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/UploadPhotosRequest'
+      responses:
+        '200':
+          description: Upload accepted or completed.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UploadResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /upload_text:
+    post:
+      operationId: uploadText
+      tags:
+        - Upload
+      summary: Create a text-only post
+      description: >-
+        Publishes a text-only post to one or more supported social platforms
+        for a given user profile.
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/UploadTextRequest'
+      responses:
+        '200':
+          description: Upload accepted or completed.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UploadResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /uploadposts/status:
+    get:
+      operationId: getUploadStatus
+      tags:
+        - Upload Management
+      summary: Get upload or scheduled job status
+      description: >-
+        Returns the status of an asynchronous upload (by request_id) or a
+        scheduled post (by job_id).
+      parameters:
+        - name: request_id
+          in: query
+          required: false
+          schema:
+            type: string
+          description: Identifier returned by an asynchronous upload.
+        - name: job_id
+          in: query
+          required: false
+          schema:
+            type: string
+          description: Identifier of a scheduled post job.
+      responses:
+        '200':
+          description: Status retrieved.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StatusResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /uploadposts/history:
+    get:
+      operationId: getUploadHistory
+      tags:
+        - Upload Management
+      summary: List upload history
+      description: Retrieves a paginated, filterable history of uploads under the API key.
+      parameters:
+        - name: page
+          in: query
+          required: false
+          schema:
+            type: integer
+          description: Page number for pagination.
+        - name: limit
+          in: query
+          required: false
+          schema:
+            type: integer
+          description: Number of records per page.
+      responses:
+        '200':
+          description: History retrieved.
+          content:
+            application/json:
+              schema:
+                type: object
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /uploadposts/users:
+    get:
+      operationId: listUsers
+      tags:
+        - Users
+      summary: List user profiles
+      description: Retrieves all user profiles created under the API key.
+      responses:
+        '200':
+          description: Profiles retrieved.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserProfileList'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+    post:
+      operationId: createUser
+      tags:
+        - Users
+      summary: Create a user profile
+      description: Creates a new user profile identified by a unique username.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateUserRequest'
+      responses:
+        '200':
+          description: Profile created.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserProfile'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+    delete:
+      operationId: deleteUser
+      tags:
+        - Users
+      summary: Delete a user profile
+      description: Removes a user profile and its associated social connections.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeleteUserRequest'
+      responses:
+        '200':
+          description: Profile deleted.
+          content:
+            application/json:
+              schema:
+                type: object
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /uploadposts/users/{username}:
+    get:
+      operationId: getUser
+      tags:
+        - Users
+      summary: Get a user profile
+      description: Fetches details for a single profile by username.
+      parameters:
+        - name: username
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Profile retrieved.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserProfile'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /uploadposts/users/generate-jwt:
+    post:
+      operationId: generateJwt
+      tags:
+        - Users
+      summary: Generate a JWT account-linking URL
+      description: >-
+        Creates a secure single-use URL that an end user visits to link their
+        social media accounts to the given profile.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GenerateJwtRequest'
+      responses:
+        '200':
+          description: Linking URL generated.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenerateJwtResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /uploadposts/users/validate-jwt:
+    post:
+      operationId: validateJwt
+      tags:
+        - Users
+      summary: Validate a JWT token
+      description: >-
+        Verifies a JWT token passed in the Authorization header and returns the
+        associated profile details.
+      responses:
+        '200':
+          description: Token validated.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserProfile'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /uploadposts/me:
+    get:
+      operationId: getMe
+      tags:
+        - Users
+      summary: Validate API key and get account info
+      description: Validates the API key and returns information about the account.
+      responses:
+        '200':
+          description: Account info retrieved.
+          content:
+            application/json:
+              schema:
+                type: object
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /analytics/{profile_username}:
+    get:
+      operationId: getAnalytics
+      tags:
+        - Analytics
+      summary: Get profile performance metrics
+      description: Retrieves performance metrics for a given profile across platforms.
+      parameters:
+        - name: profile_username
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Metrics retrieved.
+          content:
+            application/json:
+              schema:
+                type: object
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /uploadposts/total-impressions/{profile_username}:
+    get:
+      operationId: getTotalImpressions
+      tags:
+        - Analytics
+      summary: Get aggregated total impressions
+      description: Returns aggregated impressions across platforms for a profile.
+      parameters:
+        - name: profile_username
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Impressions retrieved.
+          content:
+            application/json:
+              schema:
+                type: object
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /uploadposts/post-analytics/{request_id}:
+    get:
+      operationId: getPostAnalytics
+      tags:
+        - Analytics
+      summary: Get per-post analytics by request ID
+      description: Returns analytics for a single post identified by its request_id.
+      parameters:
+        - name: request_id
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: platform_post_id
+          in: query
+          required: false
+          schema:
+            type: string
+          description: Alternatively retrieve analytics by the platform's post ID.
+      responses:
+        '200':
+          description: Post analytics retrieved.
+          content:
+            application/json:
+              schema:
+                type: object
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+components:
+  securitySchemes:
+    ApikeyAuth:
+      type: apiKey
+      in: header
+      name: Authorization
+      description: >-
+        API key authentication. Provide the header in the form
+        `Authorization: Apikey YOUR_API_KEY`.
+  responses:
+    Unauthorized:
+      description: Missing or invalid API key.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  schemas:
+    Platform:
+      type: string
+      description: Target social platform.
+      enum:
+        - tiktok
+        - instagram
+        - youtube
+        - linkedin
+        - facebook
+        - x
+        - threads
+        - pinterest
+        - bluesky
+        - reddit
+        - discord
+        - telegram
+        - google-business
+    UploadVideoRequest:
+      type: object
+      required:
+        - user
+        - platform[]
+        - video
+        - title
+      properties:
+        user:
+          type: string
+          description: Username of the profile to publish on behalf of.
+        'platform[]':
+          type: array
+          items:
+            $ref: '#/components/schemas/Platform'
+          description: One or more target platforms.
+        video:
+          type: string
+          format: binary
+          description: Video file (multipart) or a publicly accessible video URL.
+        title:
+          type: string
+          description: Title/caption of the video post.
+        async_upload:
+          type: boolean
+          description: When true, processes the upload asynchronously and returns a request_id.
+        scheduled_date:
+          type: string
+          format: date-time
+          description: ISO 8601 timestamp to schedule the post for future publishing.
+    UploadPhotosRequest:
+      type: object
+      required:
+        - user
+        - platform[]
+        - photos[]
+        - title
+      properties:
+        user:
+          type: string
+          description: Username of the profile to publish on behalf of.
+        'platform[]':
+          type: array
+          items:
+            $ref: '#/components/schemas/Platform'
+          description: One or more target platforms.
+        'photos[]':
+          type: array
+          items:
+            type: string
+            format: binary
+          description: One or more image files or publicly accessible image URLs.
+        title:
+          type: string
+          description: Title of the photo post.
+        description:
+          type: string
+          description: Body text/description for the post.
+    UploadTextRequest:
+      type: object
+      required:
+        - user
+        - platform[]
+        - title
+      properties:
+        user:
+          type: string
+          description: Username of the profile to publish on behalf of.
+        'platform[]':
+          type: array
+          items:
+            $ref: '#/components/schemas/Platform'
+          description: One or more target platforms.
+        title:
+          type: string
+          description: Text content of the post.
+    UploadResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+        request_id:
+          type: string
+          description: Present for asynchronous uploads.
+        results:
+          type: object
+          description: Per-platform publishing results.
+    StatusResponse:
+      type: object
+      properties:
+        status:
+          type: string
+          description: Current status of the upload or scheduled job.
+        results:
+          type: object
+    CreateUserRequest:
+      type: object
+      required:
+        - username
+      properties:
+        username:
+          type: string
+          description: Unique identifier for the user profile.
+    DeleteUserRequest:
+      type: object
+      required:
+        - username
+      properties:
+        username:
+          type: string
+          description: Username of the profile to remove.
+    GenerateJwtRequest:
+      type: object
+      required:
+        - username
+      properties:
+        username:
+          type: string
+          description: Profile the linking URL is generated for.
+        redirect_url:
+          type: string
+          description: URL to redirect the user to after linking.
+        logo_image:
+          type: string
+          description: Logo image to display on the linking page.
+        platforms:
+          type: array
+          items:
+            $ref: '#/components/schemas/Platform'
+          description: Restrict the linking flow to specific platforms.
+        language:
+          type: string
+          description: Language of the linking page.
+    GenerateJwtResponse:
+      type: object
+      properties:
+        access_url:
+          type: string
+          description: Single-use URL the end user visits to link accounts.
+    UserProfile:
+      type: object
+      properties:
+        username:
+          type: string
+        social_accounts:
+          type: object
+          description: Connected social accounts for the profile.
+        created_at:
+          type: string
+          format: date-time
+    UserProfileList:
+      type: object
+      properties:
+        profiles:
+          type: array
+          items:
+            $ref: '#/components/schemas/UserProfile'
+    Error:
+      type: object
+      properties:
+        success:
+          type: boolean
+        error:
+          type: string
