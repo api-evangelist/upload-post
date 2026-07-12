@@ -1,0 +1,17 @@
+generated: '2026-07-11'
+method: derived
+source: openapi/upload-post-openapi.yml
+summary:
+  types:
+  - apiKey
+  api_key_in:
+  - header
+schemes:
+- name: ApikeyAuth
+  type: apiKey
+  in: header
+  parameter: Authorization
+  description: 'API key authentication. Provide the header in the form `Authorization: Apikey
+    YOUR_API_KEY`.'
+  sources:
+  - openapi/upload-post-openapi.yml

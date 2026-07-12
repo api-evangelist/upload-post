@@ -131,6 +131,10 @@ apis:
   description: Retrieves per-profile performance metrics, aggregated total impressions
     across platforms, and per-post analytics by request_id or platform post ID.
 common:
+- type: DomainSecurity
+  url: security/upload-post-domain-security.yml
+- type: Authentication
+  url: authentication/upload-post-authentication.yml
 - type: GitHubOrganization
   url: https://github.com/Upload-Post
 - type: LinkedIn
