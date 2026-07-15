@@ -131,6 +131,8 @@ apis:
   description: Retrieves per-profile performance metrics, aggregated total impressions
     across platforms, and per-post analytics by request_id or platform post ID.
 common:
+- type: AgenticAccess
+  url: agentic-access/upload-post-agentic-access.yml
 - type: DomainSecurity
   url: security/upload-post-domain-security.yml
 - type: Authentication
