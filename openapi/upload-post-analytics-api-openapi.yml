@@ -1,0 +1,112 @@
+openapi: 3.0.1
+info:
+  title: Upload-Post Analytics API
+  description: The Upload-Post API is a universal social media publishing interface for publishing videos, photos, and text posts to TikTok, Instagram, YouTube, LinkedIn, Facebook, X (Twitter), Threads, Pinterest, Bluesky, Reddit, Discord, Telegram, and Google Business Profile. It also manages user profiles, single-use JWT account-linking URLs, upload status/history, and cross-platform analytics.
+  termsOfService: https://www.upload-post.com/terms
+  contact:
+    name: Upload-Post Support
+    url: https://www.upload-post.com/
+  version: '1.0'
+servers:
+- url: https://api.upload-post.com/api
+  description: Upload-Post production API
+security:
+- ApikeyAuth: []
+tags:
+- name: Analytics
+  description: Retrieve impressions and per-post performance metrics.
+paths:
+  /analytics/{profile_username}:
+    get:
+      operationId: getAnalytics
+      tags:
+      - Analytics
+      summary: Get profile performance metrics
+      description: Retrieves performance metrics for a given profile across platforms.
+      parameters:
+      - name: profile_username
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Metrics retrieved.
+          content:
+            application/json:
+              schema:
+                type: object
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /uploadposts/total-impressions/{profile_username}:
+    get:
+      operationId: getTotalImpressions
+      tags:
+      - Analytics
+      summary: Get aggregated total impressions
+      description: Returns aggregated impressions across platforms for a profile.
+      parameters:
+      - name: profile_username
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Impressions retrieved.
+          content:
+            application/json:
+              schema:
+                type: object
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /uploadposts/post-analytics/{request_id}:
+    get:
+      operationId: getPostAnalytics
+      tags:
+      - Analytics
+      summary: Get per-post analytics by request ID
+      description: Returns analytics for a single post identified by its request_id.
+      parameters:
+      - name: request_id
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: platform_post_id
+        in: query
+        required: false
+        schema:
+          type: string
+        description: Alternatively retrieve analytics by the platform's post ID.
+      responses:
+        '200':
+          description: Post analytics retrieved.
+          content:
+            application/json:
+              schema:
+                type: object
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+components:
+  responses:
+    Unauthorized:
+      description: Missing or invalid API key.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  schemas:
+    Error:
+      type: object
+      properties:
+        success:
+          type: boolean
+        error:
+          type: string
+  securitySchemes:
+    ApikeyAuth:
+      type: apiKey
+      in: header
+      name: Authorization
+      description: 'API key authentication. Provide the header in the form `Authorization: Apikey YOUR_API_KEY`.'

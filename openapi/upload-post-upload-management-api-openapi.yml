@@ -1,0 +1,106 @@
+openapi: 3.0.1
+info:
+  title: Upload-Post Analytics Upload Management API
+  description: The Upload-Post API is a universal social media publishing interface for publishing videos, photos, and text posts to TikTok, Instagram, YouTube, LinkedIn, Facebook, X (Twitter), Threads, Pinterest, Bluesky, Reddit, Discord, Telegram, and Google Business Profile. It also manages user profiles, single-use JWT account-linking URLs, upload status/history, and cross-platform analytics.
+  termsOfService: https://www.upload-post.com/terms
+  contact:
+    name: Upload-Post Support
+    url: https://www.upload-post.com/
+  version: '1.0'
+servers:
+- url: https://api.upload-post.com/api
+  description: Upload-Post production API
+security:
+- ApikeyAuth: []
+tags:
+- name: Upload Management
+  description: Check upload status and retrieve upload history.
+paths:
+  /uploadposts/status:
+    get:
+      operationId: getUploadStatus
+      tags:
+      - Upload Management
+      summary: Get upload or scheduled job status
+      description: Returns the status of an asynchronous upload (by request_id) or a scheduled post (by job_id).
+      parameters:
+      - name: request_id
+        in: query
+        required: false
+        schema:
+          type: string
+        description: Identifier returned by an asynchronous upload.
+      - name: job_id
+        in: query
+        required: false
+        schema:
+          type: string
+        description: Identifier of a scheduled post job.
+      responses:
+        '200':
+          description: Status retrieved.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StatusResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /uploadposts/history:
+    get:
+      operationId: getUploadHistory
+      tags:
+      - Upload Management
+      summary: List upload history
+      description: Retrieves a paginated, filterable history of uploads under the API key.
+      parameters:
+      - name: page
+        in: query
+        required: false
+        schema:
+          type: integer
+        description: Page number for pagination.
+      - name: limit
+        in: query
+        required: false
+        schema:
+          type: integer
+        description: Number of records per page.
+      responses:
+        '200':
+          description: History retrieved.
+          content:
+            application/json:
+              schema:
+                type: object
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+components:
+  schemas:
+    StatusResponse:
+      type: object
+      properties:
+        status:
+          type: string
+          description: Current status of the upload or scheduled job.
+        results:
+          type: object
+    Error:
+      type: object
+      properties:
+        success:
+          type: boolean
+        error:
+          type: string
+  responses:
+    Unauthorized:
+      description: Missing or invalid API key.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  securitySchemes:
+    ApikeyAuth:
+      type: apiKey
+      in: header
+      name: Authorization
+      description: 'API key authentication. Provide the header in the form `Authorization: Apikey YOUR_API_KEY`.'

@@ -1,0 +1,210 @@
+openapi: 3.0.1
+info:
+  title: Post Analytics Upload API
+  description: The Upload-Post API is a universal social media publishing interface for publishing videos, photos, and text posts to TikTok, Instagram, YouTube, LinkedIn, Facebook, X (Twitter), Threads, Pinterest, Bluesky, Reddit, Discord, Telegram, and Google Business Profile. It also manages user profiles, single-use JWT account-linking URLs, upload status/history, and cross-platform analytics.
+  termsOfService: https://www.upload-post.com/terms
+  contact:
+    name: Upload-Post Support
+    url: https://www.upload-post.com/
+  version: '1.0'
+servers:
+- url: https://api.upload-post.com/api
+  description: Upload-Post production API
+security:
+- ApikeyAuth: []
+tags:
+- name: Upload
+  description: Publish video, photo, and text content to social platforms.
+paths:
+  /upload:
+    post:
+      operationId: uploadVideo
+      tags:
+      - Upload
+      summary: Upload a video post
+      description: Publishes a video to one or more social platforms for a given user profile. Sent as multipart/form-data. Supports synchronous and asynchronous (async_upload=true returns a request_id) operation.
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/UploadVideoRequest'
+      responses:
+        '200':
+          description: Upload accepted or completed.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UploadResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /upload_photos:
+    post:
+      operationId: uploadPhotos
+      tags:
+      - Upload
+      summary: Upload photos or an image carousel
+      description: Publishes one or more photos (or an image carousel) to one or more social platforms for a given user profile. Sent as multipart/form-data.
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/UploadPhotosRequest'
+      responses:
+        '200':
+          description: Upload accepted or completed.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UploadResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /upload_text:
+    post:
+      operationId: uploadText
+      tags:
+      - Upload
+      summary: Create a text-only post
+      description: Publishes a text-only post to one or more supported social platforms for a given user profile.
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/UploadTextRequest'
+      responses:
+        '200':
+          description: Upload accepted or completed.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UploadResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+components:
+  responses:
+    Unauthorized:
+      description: Missing or invalid API key.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  schemas:
+    UploadResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+        request_id:
+          type: string
+          description: Present for asynchronous uploads.
+        results:
+          type: object
+          description: Per-platform publishing results.
+    Platform:
+      type: string
+      description: Target social platform.
+      enum:
+      - tiktok
+      - instagram
+      - youtube
+      - linkedin
+      - facebook
+      - x
+      - threads
+      - pinterest
+      - bluesky
+      - reddit
+      - discord
+      - telegram
+      - google-business
+    UploadTextRequest:
+      type: object
+      required:
+      - user
+      - platform[]
+      - title
+      properties:
+        user:
+          type: string
+          description: Username of the profile to publish on behalf of.
+        platform[]:
+          type: array
+          items:
+            $ref: '#/components/schemas/Platform'
+          description: One or more target platforms.
+        title:
+          type: string
+          description: Text content of the post.
+    UploadVideoRequest:
+      type: object
+      required:
+      - user
+      - platform[]
+      - video
+      - title
+      properties:
+        user:
+          type: string
+          description: Username of the profile to publish on behalf of.
+        platform[]:
+          type: array
+          items:
+            $ref: '#/components/schemas/Platform'
+          description: One or more target platforms.
+        video:
+          type: string
+          format: binary
+          description: Video file (multipart) or a publicly accessible video URL.
+        title:
+          type: string
+          description: Title/caption of the video post.
+        async_upload:
+          type: boolean
+          description: When true, processes the upload asynchronously and returns a request_id.
+        scheduled_date:
+          type: string
+          format: date-time
+          description: ISO 8601 timestamp to schedule the post for future publishing.
+    Error:
+      type: object
+      properties:
+        success:
+          type: boolean
+        error:
+          type: string
+    UploadPhotosRequest:
+      type: object
+      required:
+      - user
+      - platform[]
+      - photos[]
+      - title
+      properties:
+        user:
+          type: string
+          description: Username of the profile to publish on behalf of.
+        platform[]:
+          type: array
+          items:
+            $ref: '#/components/schemas/Platform'
+          description: One or more target platforms.
+        photos[]:
+          type: array
+          items:
+            type: string
+            format: binary
+          description: One or more image files or publicly accessible image URLs.
+        title:
+          type: string
+          description: Title of the photo post.
+        description:
+          type: string
+          description: Body text/description for the post.
+  securitySchemes:
+    ApikeyAuth:
+      type: apiKey
+      in: header
+      name: Authorization
+      description: 'API key authentication. Provide the header in the form `Authorization: Apikey YOUR_API_KEY`.'
