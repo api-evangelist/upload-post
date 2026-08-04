@@ -1,0 +1,20 @@
+{
+  "provider": "upload-post",
+  "sources": [
+    "upload-post-analytics-api-openapi.yml",
+    "upload-post-upload-api-openapi.yml",
+    "upload-post-upload-management-api-openapi.yml",
+    "upload-post-users-api-openapi.yml"
+  ],
+  "outputs": [
+    "upload-post-analytics-api-openapi.yml",
+    "upload-post-upload-api-openapi.yml",
+    "upload-post-upload-management-api-openapi.yml",
+    "upload-post-users-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}
