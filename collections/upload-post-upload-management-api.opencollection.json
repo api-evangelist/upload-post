@@ -1,0 +1,76 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Upload-Post Analytics Upload Management API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Upload Management",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get upload or scheduled job status",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.upload-post.com/api/uploadposts/status",
+            "params": [
+              {
+                "name": "request_id",
+                "value": "",
+                "type": "query",
+                "description": "Identifier returned by an asynchronous upload."
+              },
+              {
+                "name": "job_id",
+                "value": "",
+                "type": "query",
+                "description": "Identifier of a scheduled post job."
+              }
+            ]
+          },
+          "docs": "Returns the status of an asynchronous upload (by request_id) or a scheduled post (by job_id)."
+        },
+        {
+          "info": {
+            "name": "List upload history",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.upload-post.com/api/uploadposts/history",
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Page number for pagination."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Number of records per page."
+              }
+            ]
+          },
+          "docs": "Retrieves a paginated, filterable history of uploads under the API key."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

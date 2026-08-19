@@ -1,0 +1,798 @@
+{
+  "item": [
+    {
+      "id": "5e97bf01-fa47-4746-899e-23e10b59f932",
+      "name": "Upload",
+      "description": {
+        "content": "Publish video, photo, and text content to social platforms.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "03b75771-f71f-467a-8a5d-0754cd9bc0bd",
+          "name": "Upload a video post",
+          "request": {
+            "name": "Upload a video post",
+            "description": {
+              "content": "Publishes a video to one or more social platforms for a given user profile. Sent as multipart/form-data. Supports synchronous and asynchronous (async_upload=true returns a request_id) operation.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "upload"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "multipart/form-data"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "user",
+                  "value": "<string>",
+                  "type": "text",
+                  "description": "(Required) Username of the profile to publish on behalf of."
+                },
+                {
+                  "key": "platform[]",
+                  "value": "[\"<string>\",\"<string>\"]",
+                  "type": "text",
+                  "description": "(Required) One or more target platforms."
+                },
+                {
+                  "key": "video",
+                  "type": "file",
+                  "description": "(Required) Video file (multipart) or a publicly accessible video URL."
+                },
+                {
+                  "key": "title",
+                  "value": "<string>",
+                  "type": "text",
+                  "description": "(Required) Title/caption of the video post."
+                },
+                {
+                  "key": "async_upload",
+                  "value": "<boolean>",
+                  "type": "text",
+                  "description": "When true, processes the upload asynchronously and returns a request_id."
+                },
+                {
+                  "key": "scheduled_date",
+                  "value": "<dateTime>",
+                  "type": "text",
+                  "description": "ISO 8601 timestamp to schedule the post for future publishing."
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "fd830389-e77a-4135-aac3-93b51e2e6e78",
+              "name": "Upload accepted or completed.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "upload"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "description": {
+                        "content": "(Required) Username of the profile to publish on behalf of.",
+                        "type": "text/plain"
+                      },
+                      "key": "user",
+                      "value": "<string>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "(Required) One or more target platforms.",
+                        "type": "text/plain"
+                      },
+                      "key": "platform[]",
+                      "value": "[\"<string>\",\"<string>\"]",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "(Required) Video file (multipart) or a publicly accessible video URL.",
+                        "type": "text/plain"
+                      },
+                      "key": "video",
+                      "value": "<binary>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "(Required) Title/caption of the video post.",
+                        "type": "text/plain"
+                      },
+                      "key": "title",
+                      "value": "<string>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "When true, processes the upload asynchronously and returns a request_id.",
+                        "type": "text/plain"
+                      },
+                      "key": "async_upload",
+                      "value": "<boolean>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "ISO 8601 timestamp to schedule the post for future publishing.",
+                        "type": "text/plain"
+                      },
+                      "key": "scheduled_date",
+                      "value": "<dateTime>",
+                      "type": "text"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": false,\n  \"request_id\": \"string\",\n  \"results\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "eeeb8b53-4e4c-445c-85a8-ac41dfd24c59",
+              "name": "Missing or invalid API key.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "upload"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "description": {
+                        "content": "(Required) Username of the profile to publish on behalf of.",
+                        "type": "text/plain"
+                      },
+                      "key": "user",
+                      "value": "<string>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "(Required) One or more target platforms.",
+                        "type": "text/plain"
+                      },
+                      "key": "platform[]",
+                      "value": "[\"<string>\",\"<string>\"]",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "(Required) Video file (multipart) or a publicly accessible video URL.",
+                        "type": "text/plain"
+                      },
+                      "key": "video",
+                      "value": "<binary>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "(Required) Title/caption of the video post.",
+                        "type": "text/plain"
+                      },
+                      "key": "title",
+                      "value": "<string>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "When true, processes the upload asynchronously and returns a request_id.",
+                        "type": "text/plain"
+                      },
+                      "key": "async_upload",
+                      "value": "<boolean>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "ISO 8601 timestamp to schedule the post for future publishing.",
+                        "type": "text/plain"
+                      },
+                      "key": "scheduled_date",
+                      "value": "<dateTime>",
+                      "type": "text"
+                    }
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": false,\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "9430e473-ed43-4f81-a2be-514befbc9737",
+          "name": "Upload photos or an image carousel",
+          "request": {
+            "name": "Upload photos or an image carousel",
+            "description": {
+              "content": "Publishes one or more photos (or an image carousel) to one or more social platforms for a given user profile. Sent as multipart/form-data.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "upload_photos"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "multipart/form-data"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "user",
+                  "value": "<string>",
+                  "type": "text",
+                  "description": "(Required) Username of the profile to publish on behalf of."
+                },
+                {
+                  "key": "platform[]",
+                  "value": "[\"<string>\",\"<string>\"]",
+                  "type": "text",
+                  "description": "(Required) One or more target platforms."
+                },
+                {
+                  "key": "photos[]",
+                  "value": "[\"<binary>\",\"<binary>\"]",
+                  "type": "text",
+                  "description": "(Required) One or more image files or publicly accessible image URLs."
+                },
+                {
+                  "key": "title",
+                  "value": "<string>",
+                  "type": "text",
+                  "description": "(Required) Title of the photo post."
+                },
+                {
+                  "key": "description",
+                  "value": "<string>",
+                  "type": "text",
+                  "description": "Body text/description for the post."
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "beb76508-3d86-4190-b823-bcd760f8643e",
+              "name": "Upload accepted or completed.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "upload_photos"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "description": {
+                        "content": "(Required) Username of the profile to publish on behalf of.",
+                        "type": "text/plain"
+                      },
+                      "key": "user",
+                      "value": "<string>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "(Required) One or more target platforms.",
+                        "type": "text/plain"
+                      },
+                      "key": "platform[]",
+                      "value": "[\"<string>\",\"<string>\"]",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "(Required) One or more image files or publicly accessible image URLs.",
+                        "type": "text/plain"
+                      },
+                      "key": "photos[]",
+                      "value": "[\"<binary>\",\"<binary>\"]",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "(Required) Title of the photo post.",
+                        "type": "text/plain"
+                      },
+                      "key": "title",
+                      "value": "<string>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "Body text/description for the post.",
+                        "type": "text/plain"
+                      },
+                      "key": "description",
+                      "value": "<string>",
+                      "type": "text"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": false,\n  \"request_id\": \"string\",\n  \"results\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "fa5d38af-c54d-4821-b8cb-dab4f62d237f",
+              "name": "Missing or invalid API key.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "upload_photos"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "description": {
+                        "content": "(Required) Username of the profile to publish on behalf of.",
+                        "type": "text/plain"
+                      },
+                      "key": "user",
+                      "value": "<string>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "(Required) One or more target platforms.",
+                        "type": "text/plain"
+                      },
+                      "key": "platform[]",
+                      "value": "[\"<string>\",\"<string>\"]",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "(Required) One or more image files or publicly accessible image URLs.",
+                        "type": "text/plain"
+                      },
+                      "key": "photos[]",
+                      "value": "[\"<binary>\",\"<binary>\"]",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "(Required) Title of the photo post.",
+                        "type": "text/plain"
+                      },
+                      "key": "title",
+                      "value": "<string>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "Body text/description for the post.",
+                        "type": "text/plain"
+                      },
+                      "key": "description",
+                      "value": "<string>",
+                      "type": "text"
+                    }
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": false,\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b6c6cde2-f288-4a3e-a850-855ac462712f",
+          "name": "Create a text-only post",
+          "request": {
+            "name": "Create a text-only post",
+            "description": {
+              "content": "Publishes a text-only post to one or more supported social platforms for a given user profile.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "upload_text"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "multipart/form-data"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "user",
+                  "value": "<string>",
+                  "type": "text",
+                  "description": "(Required) Username of the profile to publish on behalf of."
+                },
+                {
+                  "key": "platform[]",
+                  "value": "[\"<string>\",\"<string>\"]",
+                  "type": "text",
+                  "description": "(Required) One or more target platforms."
+                },
+                {
+                  "key": "title",
+                  "value": "<string>",
+                  "type": "text",
+                  "description": "(Required) Text content of the post."
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "ddc832b3-9d67-4351-83a4-42e63ac092dd",
+              "name": "Upload accepted or completed.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "upload_text"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "description": {
+                        "content": "(Required) Username of the profile to publish on behalf of.",
+                        "type": "text/plain"
+                      },
+                      "key": "user",
+                      "value": "<string>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "(Required) One or more target platforms.",
+                        "type": "text/plain"
+                      },
+                      "key": "platform[]",
+                      "value": "[\"<string>\",\"<string>\"]",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "(Required) Text content of the post.",
+                        "type": "text/plain"
+                      },
+                      "key": "title",
+                      "value": "<string>",
+                      "type": "text"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": false,\n  \"request_id\": \"string\",\n  \"results\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5807d999-2161-40e8-887b-73d6ee232b76",
+              "name": "Missing or invalid API key.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "upload_text"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "description": {
+                        "content": "(Required) Username of the profile to publish on behalf of.",
+                        "type": "text/plain"
+                      },
+                      "key": "user",
+                      "value": "<string>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "(Required) One or more target platforms.",
+                        "type": "text/plain"
+                      },
+                      "key": "platform[]",
+                      "value": "[\"<string>\",\"<string>\"]",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "(Required) Text content of the post.",
+                        "type": "text/plain"
+                      },
+                      "key": "title",
+                      "value": "<string>",
+                      "type": "text"
+                    }
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": false,\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.upload-post.com/api",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "Authorization"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "4c6f03d8-ca8c-470e-9649-76e46828b187",
+    "name": "Post Analytics Upload API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Upload-Post API is a universal social media publishing interface for publishing videos, photos, and text posts to TikTok, Instagram, YouTube, LinkedIn, Facebook, X (Twitter), Threads, Pinterest, Bluesky, Reddit, Discord, Telegram, and Google Business Profile. It also manages user profiles, single-use JWT account-linking URLs, upload status/history, and cross-platform analytics.\n\nContact Support:\n Name: Upload-Post Support",
+      "type": "text/plain"
+    }
+  }
+}

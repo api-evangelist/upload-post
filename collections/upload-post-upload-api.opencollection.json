@@ -1,0 +1,71 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Post Analytics Upload API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Upload",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Upload a video post",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.upload-post.com/api/upload",
+            "body": {
+              "type": "multipart-form",
+              "data": []
+            }
+          },
+          "docs": "Publishes a video to one or more social platforms for a given user profile. Sent as multipart/form-data. Supports synchronous and asynchronous (async_upload=true returns a request_id) operation."
+        },
+        {
+          "info": {
+            "name": "Upload photos or an image carousel",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.upload-post.com/api/upload_photos",
+            "body": {
+              "type": "multipart-form",
+              "data": []
+            }
+          },
+          "docs": "Publishes one or more photos (or an image carousel) to one or more social platforms for a given user profile. Sent as multipart/form-data."
+        },
+        {
+          "info": {
+            "name": "Create a text-only post",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.upload-post.com/api/upload_text",
+            "body": {
+              "type": "multipart-form",
+              "data": []
+            }
+          },
+          "docs": "Publishes a text-only post to one or more supported social platforms for a given user profile."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,122 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Upload-Post Analytics Users API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Users",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List user profiles",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.upload-post.com/api/uploadposts/users"
+          },
+          "docs": "Retrieves all user profiles created under the API key."
+        },
+        {
+          "info": {
+            "name": "Create a user profile",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.upload-post.com/api/uploadposts/users",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new user profile identified by a unique username."
+        },
+        {
+          "info": {
+            "name": "Delete a user profile",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.upload-post.com/api/uploadposts/users",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Removes a user profile and its associated social connections."
+        },
+        {
+          "info": {
+            "name": "Get a user profile",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.upload-post.com/api/uploadposts/users/:username",
+            "params": [
+              {
+                "name": "username",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Fetches details for a single profile by username."
+        },
+        {
+          "info": {
+            "name": "Generate a JWT account-linking URL",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.upload-post.com/api/uploadposts/users/generate-jwt",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a secure single-use URL that an end user visits to link their social media accounts to the given profile."
+        },
+        {
+          "info": {
+            "name": "Validate a JWT token",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.upload-post.com/api/uploadposts/users/validate-jwt"
+          },
+          "docs": "Verifies a JWT token passed in the Authorization header and returns the associated profile details."
+        },
+        {
+          "info": {
+            "name": "Validate API key and get account info",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.upload-post.com/api/uploadposts/me"
+          },
+          "docs": "Validates the API key and returns information about the account."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

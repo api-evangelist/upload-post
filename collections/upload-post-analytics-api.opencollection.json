@@ -1,0 +1,86 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Upload-Post Analytics API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Analytics",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get profile performance metrics",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.upload-post.com/api/analytics/:profile_username",
+            "params": [
+              {
+                "name": "profile_username",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Retrieves performance metrics for a given profile across platforms."
+        },
+        {
+          "info": {
+            "name": "Get aggregated total impressions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.upload-post.com/api/uploadposts/total-impressions/:profile_username",
+            "params": [
+              {
+                "name": "profile_username",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Returns aggregated impressions across platforms for a profile."
+        },
+        {
+          "info": {
+            "name": "Get per-post analytics by request ID",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.upload-post.com/api/uploadposts/post-analytics/:request_id",
+            "params": [
+              {
+                "name": "request_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "platform_post_id",
+                "value": "",
+                "type": "query",
+                "description": "Alternatively retrieve analytics by the platform's post ID."
+              }
+            ]
+          },
+          "docs": "Returns analytics for a single post identified by its request_id."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
