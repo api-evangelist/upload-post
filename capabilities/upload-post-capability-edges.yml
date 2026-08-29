@@ -1,0 +1,26 @@
+slug: upload-post
+provider: Upload-Post
+generated_by: planning/capability-mapping/scripts/classify_capabilities.py
+model: claude-opus-5
+frame:
+- Media, Entertainment & Telecom Content
+min_confidence: 0.7
+capability_model:
+  source: https://github.com/vincentmakes/turbo-ea-capabilities
+  license: CC-BY-4.0
+  attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
+    CC BY 4.0
+  notice: NOTICE
+edge_count: 1
+edges:
+- tag: Upload
+  spec_file: upload-post-upload-api-openapi.yml
+  capability_id: BC-400.60
+  capability_id_l1: BC-400
+  capability_name: Digital Marketing Management
+  confidence: 0.7
+  evidence: POST /upload  uploadVideo  Upload a video post; POST /upload_photos  Upload photos or an image
+    carousel; POST /upload_text  Create a text-only post
+  reason: The operations publish video, photo and text posts to social platforms via a single interface,
+    i.e. social channel publishing. This realises digital/social marketing execution; content marketing
+    distribution (BC-400.70) is the plausible alternative, hence 0.7 rather than higher.

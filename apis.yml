@@ -132,6 +132,9 @@ apis:
   - type: Documentation
     url: https://docs.upload-post.com/api/user-profiles/
 common:
+- type: CapabilityMap
+  url: capabilities/upload-post-capability-edges.yml
+  name: Upload-Post Business Capability Map
 - type: AgenticAccess
   url: agentic-access/upload-post-agentic-access.yml
 - type: DomainSecurity
