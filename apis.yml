@@ -7,6 +7,18 @@ description: Upload-Post is a universal social media publishing API that lets de
   Facebook, X (Twitter), Threads, Pinterest, Bluesky, Reddit, Discord, Telegram, and
   Google Business Profile through a single REST interface, with managed user profiles,
   OAuth account linking, scheduling, and cross-platform analytics.
+deliveryModel:
+  model: saas
+  open_source: false
+  commercial: true
+  callable_host: true
+  label: Hosted service · you call their endpoint
+  confidence: high
+  source:
+  - openapi
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 accessModel:
   pricing: freemium
   onboarding: self-serve
