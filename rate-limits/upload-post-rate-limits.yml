@@ -1,63 +1,119 @@
-specification: API Commons Rate Limits
-specificationVersion: '0.1'
-schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/RateLimits
-provider: Upload-Post
-providerId: upload-post
-created: '2026-06-25'
-modified: '2026-06-25'
-reconciled: false
-tags:
-- Social Media
-- Publishing
-- Video
-- Content
-- Cross Posting
-- Rate Limiting
-- Quotas
-- Throttling
-description: >-
-  Upload-Post primarily meters usage by a monthly upload allowance that varies
-  by plan (10 uploads/month on the free tier; unlimited on paid plans) and by
-  the number of connected profiles. Per-platform publishing is additionally
-  subject to the underlying social network's own API limits and content
-  policies. Specific HTTP request-per-minute throttling values are not
-  documented publicly and are not reconciled in this artifact.
-notes: >-
-  Verify current monthly upload allowances, profile caps, and any request-rate
-  throttling in the Upload-Post dashboard and documentation during
-  reconciliation. Downstream limits enforced by TikTok, Instagram, YouTube,
-  LinkedIn, and other connected platforms also apply.
+# Rate limits transcribed from the provider's own documentation — see provenance. Quoted, not derived.
+generated: '2026-09-20'
+method: searched
+source: https://docs.upload-post.com/guides/rate-limits/
 sources:
-- https://docs.upload-post.com/api/overview/
-- https://www.upload-post.com/
-responseCodes:
-  throttled: 429
+- https://docs.upload-post.com/guides/rate-limits/
+provenance:
+  tool: planning/api-economics/harvest_ratelimits.py
+  run: 20260920T133210
+  grounding: every limit_text was found verbatim in the fetched page text
+published: true
+note: Plan limits also list 10-minute windows (300/500/1,000/2,500) in the same table rows; daily caps
+  are rolling 24-hour windows per social account.
+limit_count: 17
 limits:
-- name: Monthly Uploads (Free)
+- name: Free plan per-minute
+  limit_text: Free 60 300
+  limit: 60
+  window: minute
+  scope: plan
+  plan: Free
+- name: Professional plan per-minute
+  limit_text: Professional 100 500
+  limit: 100
+  window: minute
+  scope: plan
+  plan: Professional
+- name: Advanced plan per-minute
+  limit_text: Advanced 200 1,000
+  limit: 200
+  window: minute
+  scope: plan
+  plan: Advanced
+- name: Business plan per-minute
+  limit_text: Business 500 2,500
+  limit: 500
+  window: minute
+  scope: plan
+  plan: Business
+- name: Hard ceiling per minute
+  limit_text: 'Hard ceiling: 1,000 requests/min and 5,000 requests/10 min.'
+  limit: 1000
+  window: minute
   scope: account
-  metric: uploads
+- name: Per-profile increment
+  limit_text: +2 requests/min and +10 requests/10 min per profile
+  limit: 2
+  window: minute
+  scope: account
+- name: Instagram daily cap
+  limit_text: Instagram 50
+  limit: 50
+  window: day
+  scope: account
+  endpoint: Instagram
+- name: TikTok daily cap
+  limit_text: TikTok 15
+  limit: 15
+  window: day
+  scope: account
+  endpoint: TikTok
+- name: LinkedIn daily cap
+  limit_text: LinkedIn 150
+  limit: 150
+  window: day
+  scope: account
+  endpoint: LinkedIn
+- name: YouTube daily cap
+  limit_text: YouTube 10
   limit: 10
-  notes: Free tier allowance; resets monthly.
-- name: Monthly Uploads (Paid)
+  window: day
   scope: account
-  metric: uploads
-  limit: unlimited
-  notes: Paid subscription plans remove the monthly upload cap.
-- name: Connected Profiles
+  endpoint: YouTube
+- name: Facebook daily cap
+  limit_text: Facebook 25
+  limit: 25
+  window: day
   scope: account
-  metric: profiles
-  limit: see provider documentation
-  notes: Number of connected profiles (social accounts) is capped per plan tier.
-- name: Per-Platform Limits
-  scope: platform
-  metric: requests
-  limit: see platform documentation
-  notes: Downstream social networks enforce their own publishing rate limits and policies.
-policies:
-- name: Plan-Based Allowances
-  description: Upload allowances and profile caps increase with paid plan tiers.
-- name: Backoff Strategy
-  description: Clients should implement exponential backoff with jitter and honor Retry-After on 429 responses.
-maintainers:
-- FN: Kin Lane
-  email: kin@apievangelist.com
+  endpoint: Facebook
+- name: X daily cap
+  limit_text: X (Twitter) 50
+  limit: 50
+  window: day
+  scope: account
+  endpoint: X (Twitter)
+- name: Threads daily cap
+  limit_text: Threads 50
+  limit: 50
+  window: day
+  scope: account
+  endpoint: Threads
+- name: Pinterest daily cap
+  limit_text: Pinterest 20
+  limit: 20
+  window: day
+  scope: account
+  endpoint: Pinterest
+- name: Bluesky daily cap
+  limit_text: Bluesky 25 videos / 10 GB (video quota)
+  limit: 25
+  window: day
+  scope: account
+  endpoint: Bluesky
+- name: Monthly uploads Free
+  limit_text: Free 10
+  limit: 10
+  window: month
+  scope: plan
+  plan: Free
+- name: Auth brute-force block
+  limit_text: After 10 consecutive failed attempts with the same invalid key, the IP is blocked for 5
+    minutes
+  limit: 10
+  scope: ip
+headers:
+- X-RateLimit-Limit
+- X-RateLimit-Remaining
+- X-RateLimit-Reset
+exceeded_status: 429
