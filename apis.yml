@@ -132,6 +132,8 @@ apis:
   - type: Documentation
     url: https://docs.upload-post.com/api/user-profiles/
 common:
+- type: Pricing
+  url: https://www.upload-post.com/
 - type: CapabilityMap
   url: capabilities/upload-post-capability-edges.yml
   name: Upload-Post Business Capability Map

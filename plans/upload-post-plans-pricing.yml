@@ -1,89 +1,67 @@
-specification: API Commons Plans
-specificationVersion: '0.1'
-schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/Plans
-provider: Upload-Post
-providerId: upload-post
-created: '2026-06-25'
-modified: '2026-06-25'
-reconciled: false
-tags:
-- Social Media
-- Publishing
-- Video
-- Content
-- Cross Posting
-- Plans
-description: >-
-  Upload-Post offers a free tier and paid subscription plans. The free tier
-  provides 10 uploads per month and a limited number of managed profiles. Paid
-  plans are billed monthly (with discounted annual billing), unlock API access
-  and unlimited uploads, and scale primarily by the number of connected
-  profiles (social accounts). Exact tier names, profile counts, and prices are
-  set on the Upload-Post pricing page and are not fully reconciled here.
-notes: >-
-  Pricing reported from public pages varies between comparison sources;
-  verify current tier names, profile limits, and prices on the Upload-Post
-  pricing page during reconciliation. The entry paid plan was reported around
-  $16/month billed annually for 5 profiles.
+# Pricing transcribed from the provider's own page — see provenance. Numbers are quoted, not derived.
+generated: '2026-09-20'
+method: searched
+source: https://www.upload-post.com/
 sources:
 - https://www.upload-post.com/
-- https://app.upload-post.com/pricing
-- https://docs.upload-post.com/api/overview/
+provenance:
+  tool: planning/api-economics/harvest_pricing.py
+  run: 20260920T124425
+  grounding: every price_text was found verbatim in the fetched page text
+audience: developer-api
+pricing_basis: tiered-subscription
+published: true
+note: Homepage with embedded pricing section; monthly/annual toggle (-40% annual). Prices in USD as displayed.
+plan_count: 5
+currency: USD
 plans:
-- id: upload-post-free
-  name: Free
-  type: free
-  description: >-
-    No-cost tier for trying the service, with a limited monthly upload
-    allowance and no credit card required.
-  entries:
-  - label: Monthly Uploads
-    name: free_uploads
-    type: free
-    metric: uploads
-    limit: 10
-    timeFrame: month
-    geo: global
-    unit: 1
-    price: $0
-    userMultiplied: false
-  elements:
-  - name: Multi-Platform Publishing
-  - name: Managed User Profiles
-- id: upload-post-paid
-  name: Paid (Subscription)
-  type: subscription
-  description: >-
-    Paid subscription unlocking API access and unlimited uploads, scaling by
-    the number of connected profiles. Entry pricing was reported around
-    $16/month billed annually for 5 profiles; higher tiers add more profiles.
-  entries:
-  - label: Subscription
-    name: paid_subscription
-    type: flat
-    metric: profiles
-    limit: -1
-    timeFrame: month
-    geo: global
-    unit: 1
-    price: from ~$16/month (billed annually); see pricing page
-    userMultiplied: false
-  - label: Uploads
-    name: paid_uploads
-    type: flat
-    metric: uploads
-    limit: -1
-    timeFrame: month
-    geo: global
-    unit: 1
-    price: unlimited on paid plans
-    userMultiplied: false
-  elements:
-  - name: API Access
-  - name: Unlimited Uploads
-  - name: Multi-Platform Publishing
-  - name: Scheduling
-  - name: Analytics
-maintainers:
-- FN: Kin Lane
-  email: kin@apievangelist.com
+- name: Free
+  price_text: $0 / mo
+  price: 0
+  currency: USD
+  period: month
+  unit: plan
+  included_quota: 10 uploads/ mo, 2 profiles, Video editor API (FFmpeg) — 30 min/ mo, AI Shorts Uploader
+    — 10 analyses/ mo
+- name: Basic
+  price_text: $16 / mo
+  price: 16
+  currency: USD
+  period: month
+  unit: plan
+  included_quota: Unlimited uploads, 5 profiles, FFmpeg 300 min/mo, AI Shorts Uploader 100 analyses/mo,
+    1 seat; $192 billed annually
+  overage: 'Add extra profiles: + 5 profiles +$120/yr; + 10 profiles +$200/yr; Post links on X / Twitter
+    + $19 / mo'
+- name: Professional
+  price_text: $33 / mo
+  price: 33
+  currency: USD
+  period: month
+  unit: plan
+  included_quota: Unlimited uploads, 25 profiles, FFmpeg 1,000 min/mo, AI Shorts Uploader 300 analyses/mo,
+    2 seats; $400 billed annually
+  overage: + 15 profiles +$280/yr; + 25 profiles +$440/yr; Post links on X / Twitter + $19 / mo
+- name: Advanced
+  price_text: $118 / mo
+  price: 118
+  currency: USD
+  period: month
+  unit: plan
+  included_quota: Unlimited uploads, 75 profiles, FFmpeg 3,000 min/mo, AI Shorts Uploader 600 analyses/mo,
+    5 seats; $1,411 billed annually
+  overage: + 25 profiles +$650/yr; + 50 profiles +$1,150/yr; Post links on X / Twitter + $19 / mo
+- name: Business
+  price_text: $350 / mo
+  price: 350
+  currency: USD
+  period: month
+  unit: plan
+  included_quota: Unlimited uploads, 225 profiles, FFmpeg 10,000 min/mo, AI Shorts Uploader 1,000 analyses/mo,
+    10 seats; $4,205 billed annually
+  overage: 'Extra profiles: : + $1 / mo each'
+rate_limit_statements:
+- 10 uploads/ mo
+- up to 50 link-posts/mo
+- Video editor API (FFmpeg) — 30 min/ mo
+- AI Shorts Uploader — 10 analyses/ mo
