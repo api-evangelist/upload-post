@@ -1,0 +1,1 @@
+{"resource":"https://mcp.upload-post.com/mcp","authorization_servers":["https://mcp.upload-post.com"],"bearer_methods_supported":["header"],"resource_documentation":"https://docs.upload-post.com/guides/mcp-server-integration","scopes_supported":["mcp.full"]}

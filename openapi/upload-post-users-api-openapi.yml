@@ -1,6 +1,6 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: Upload-Post Analytics Users API
+  title: Upload-Post Users API
   description: The Upload-Post API is a universal social media publishing interface for publishing videos, photos, and text posts to TikTok, Instagram, YouTube, LinkedIn, Facebook, X (Twitter), Threads, Pinterest, Bluesky, Reddit, Discord, Telegram, and Google Business Profile. It also manages user profiles, single-use JWT account-linking URLs, upload status/history, and cross-platform analytics.
   termsOfService: https://www.upload-post.com/terms
   contact:
@@ -152,13 +152,14 @@ paths:
           $ref: '#/components/responses/Unauthorized'
 components:
   schemas:
-    UserProfileList:
+    CreateUserRequest:
       type: object
+      required:
+      - username
       properties:
-        profiles:
-          type: array
-          items:
-            $ref: '#/components/schemas/UserProfile'
+        username:
+          type: string
+          description: Unique identifier for the user profile.
     UserProfile:
       type: object
       properties:
@@ -170,6 +171,36 @@ components:
         created_at:
           type: string
           format: date-time
+    DeleteUserRequest:
+      type: object
+      required:
+      - username
+      properties:
+        username:
+          type: string
+          description: Username of the profile to remove.
+    GenerateJwtRequest:
+      type: object
+      required:
+      - username
+      properties:
+        username:
+          type: string
+          description: Profile the linking URL is generated for.
+        redirect_url:
+          type: string
+          description: URL to redirect the user to after linking.
+        logo_image:
+          type: string
+          description: Logo image to display on the linking page.
+        platforms:
+          type: array
+          items:
+            $ref: '#/components/schemas/Platform'
+          description: Restrict the linking flow to specific platforms.
+        language:
+          type: string
+          description: Language of the linking page.
     Platform:
       type: string
       description: Target social platform.
@@ -193,44 +224,6 @@ components:
         access_url:
           type: string
           description: Single-use URL the end user visits to link accounts.
-    GenerateJwtRequest:
-      type: object
-      required:
-      - username
-      properties:
-        username:
-          type: string
-          description: Profile the linking URL is generated for.
-        redirect_url:
-          type: string
-          description: URL to redirect the user to after linking.
-        logo_image:
-          type: string
-          description: Logo image to display on the linking page.
-        platforms:
-          type: array
-          items:
-            $ref: '#/components/schemas/Platform'
-          description: Restrict the linking flow to specific platforms.
-        language:
-          type: string
-          description: Language of the linking page.
-    DeleteUserRequest:
-      type: object
-      required:
-      - username
-      properties:
-        username:
-          type: string
-          description: Username of the profile to remove.
-    CreateUserRequest:
-      type: object
-      required:
-      - username
-      properties:
-        username:
-          type: string
-          description: Unique identifier for the user profile.
     Error:
       type: object
       properties:
@@ -238,6 +231,13 @@ components:
           type: boolean
         error:
           type: string
+    UserProfileList:
+      type: object
+      properties:
+        profiles:
+          type: array
+          items:
+            $ref: '#/components/schemas/UserProfile'
   responses:
     Unauthorized:
       description: Missing or invalid API key.

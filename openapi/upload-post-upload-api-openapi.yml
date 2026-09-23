@@ -1,6 +1,6 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: Post Analytics Upload API
+  title: Post Upload API
   description: The Upload-Post API is a universal social media publishing interface for publishing videos, photos, and text posts to TikTok, Instagram, YouTube, LinkedIn, Facebook, X (Twitter), Threads, Pinterest, Bluesky, Reddit, Discord, Telegram, and Google Business Profile. It also manages user profiles, single-use JWT account-linking URLs, upload status/history, and cross-platform analytics.
   termsOfService: https://www.upload-post.com/terms
   contact:
@@ -83,14 +83,53 @@ paths:
         '401':
           $ref: '#/components/responses/Unauthorized'
 components:
-  responses:
-    Unauthorized:
-      description: Missing or invalid API key.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
   schemas:
+    UploadTextRequest:
+      type: object
+      required:
+      - user
+      - platform[]
+      - title
+      properties:
+        user:
+          type: string
+          description: Username of the profile to publish on behalf of.
+        platform[]:
+          type: array
+          items:
+            $ref: '#/components/schemas/Platform'
+          description: One or more target platforms.
+        title:
+          type: string
+          description: Text content of the post.
+    UploadPhotosRequest:
+      type: object
+      required:
+      - user
+      - platform[]
+      - photos[]
+      - title
+      properties:
+        user:
+          type: string
+          description: Username of the profile to publish on behalf of.
+        platform[]:
+          type: array
+          items:
+            $ref: '#/components/schemas/Platform'
+          description: One or more target platforms.
+        photos[]:
+          type: array
+          items:
+            type: string
+            format: binary
+          description: One or more image files or publicly accessible image URLs.
+        title:
+          type: string
+          description: Title of the photo post.
+        description:
+          type: string
+          description: Body text/description for the post.
     UploadResponse:
       type: object
       properties:
@@ -119,24 +158,13 @@ components:
       - discord
       - telegram
       - google-business
-    UploadTextRequest:
+    Error:
       type: object
-      required:
-      - user
-      - platform[]
-      - title
       properties:
-        user:
+        success:
+          type: boolean
+        error:
           type: string
-          description: Username of the profile to publish on behalf of.
-        platform[]:
-          type: array
-          items:
-            $ref: '#/components/schemas/Platform'
-          description: One or more target platforms.
-        title:
-          type: string
-          description: Text content of the post.
     UploadVideoRequest:
       type: object
       required:
@@ -167,41 +195,13 @@ components:
           type: string
           format: date-time
           description: ISO 8601 timestamp to schedule the post for future publishing.
-    Error:
-      type: object
-      properties:
-        success:
-          type: boolean
-        error:
-          type: string
-    UploadPhotosRequest:
-      type: object
-      required:
-      - user
-      - platform[]
-      - photos[]
-      - title
-      properties:
-        user:
-          type: string
-          description: Username of the profile to publish on behalf of.
-        platform[]:
-          type: array
-          items:
-            $ref: '#/components/schemas/Platform'
-          description: One or more target platforms.
-        photos[]:
-          type: array
-          items:
-            type: string
-            format: binary
-          description: One or more image files or publicly accessible image URLs.
-        title:
-          type: string
-          description: Title of the photo post.
-        description:
-          type: string
-          description: Body text/description for the post.
+  responses:
+    Unauthorized:
+      description: Missing or invalid API key.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   securitySchemes:
     ApikeyAuth:
       type: apiKey
