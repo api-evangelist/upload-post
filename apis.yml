@@ -34,7 +34,7 @@ accessModel:
   method: derived
 image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/upload-post.png
 tags:
-- Social-Media
+- Social Media
 - Publishing
 - Video
 - Content
@@ -45,6 +45,7 @@ tags_raw:
 - Video
 - Content
 - Cross Posting
+- Social-Media
 created: '2026-06-25'
 modified: '2026-06-25'
 specificationVersion: '0.23'

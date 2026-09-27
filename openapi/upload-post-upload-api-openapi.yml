@@ -84,6 +84,17 @@ paths:
           $ref: '#/components/responses/Unauthorized'
 components:
   schemas:
+    UploadResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+        request_id:
+          type: string
+          description: Present for asynchronous uploads.
+        results:
+          type: object
+          description: Per-platform publishing results.
     UploadTextRequest:
       type: object
       required:
@@ -130,17 +141,6 @@ components:
         description:
           type: string
           description: Body text/description for the post.
-    UploadResponse:
-      type: object
-      properties:
-        success:
-          type: boolean
-        request_id:
-          type: string
-          description: Present for asynchronous uploads.
-        results:
-          type: object
-          description: Per-platform publishing results.
     Platform:
       type: string
       description: Target social platform.
@@ -158,13 +158,6 @@ components:
       - discord
       - telegram
       - google-business
-    Error:
-      type: object
-      properties:
-        success:
-          type: boolean
-        error:
-          type: string
     UploadVideoRequest:
       type: object
       required:
@@ -195,6 +188,13 @@ components:
           type: string
           format: date-time
           description: ISO 8601 timestamp to schedule the post for future publishing.
+    Error:
+      type: object
+      properties:
+        success:
+          type: boolean
+        error:
+          type: string
   responses:
     Unauthorized:
       description: Missing or invalid API key.
