@@ -75,21 +75,7 @@ paths:
         '401':
           $ref: '#/components/responses/Unauthorized'
 components:
-  responses:
-    Unauthorized:
-      description: Missing or invalid API key.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
   schemas:
-    Error:
-      type: object
-      properties:
-        success:
-          type: boolean
-        error:
-          type: string
     StatusResponse:
       type: object
       properties:
@@ -98,6 +84,20 @@ components:
           description: Current status of the upload or scheduled job.
         results:
           type: object
+    Error:
+      type: object
+      properties:
+        success:
+          type: boolean
+        error:
+          type: string
+  responses:
+    Unauthorized:
+      description: Missing or invalid API key.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   securitySchemes:
     ApikeyAuth:
       type: apiKey

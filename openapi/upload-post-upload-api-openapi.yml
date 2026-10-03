@@ -84,6 +84,13 @@ paths:
           $ref: '#/components/responses/Unauthorized'
 components:
   schemas:
+    Error:
+      type: object
+      properties:
+        success:
+          type: boolean
+        error:
+          type: string
     UploadResponse:
       type: object
       properties:
@@ -95,24 +102,6 @@ components:
         results:
           type: object
           description: Per-platform publishing results.
-    UploadTextRequest:
-      type: object
-      required:
-      - user
-      - platform[]
-      - title
-      properties:
-        user:
-          type: string
-          description: Username of the profile to publish on behalf of.
-        platform[]:
-          type: array
-          items:
-            $ref: '#/components/schemas/Platform'
-          description: One or more target platforms.
-        title:
-          type: string
-          description: Text content of the post.
     UploadPhotosRequest:
       type: object
       required:
@@ -188,13 +177,24 @@ components:
           type: string
           format: date-time
           description: ISO 8601 timestamp to schedule the post for future publishing.
-    Error:
+    UploadTextRequest:
       type: object
+      required:
+      - user
+      - platform[]
+      - title
       properties:
-        success:
-          type: boolean
-        error:
+        user:
           type: string
+          description: Username of the profile to publish on behalf of.
+        platform[]:
+          type: array
+          items:
+            $ref: '#/components/schemas/Platform'
+          description: One or more target platforms.
+        title:
+          type: string
+          description: Text content of the post.
   responses:
     Unauthorized:
       description: Missing or invalid API key.
