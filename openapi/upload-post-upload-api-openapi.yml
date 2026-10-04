@@ -84,52 +84,6 @@ paths:
           $ref: '#/components/responses/Unauthorized'
 components:
   schemas:
-    Error:
-      type: object
-      properties:
-        success:
-          type: boolean
-        error:
-          type: string
-    UploadResponse:
-      type: object
-      properties:
-        success:
-          type: boolean
-        request_id:
-          type: string
-          description: Present for asynchronous uploads.
-        results:
-          type: object
-          description: Per-platform publishing results.
-    UploadPhotosRequest:
-      type: object
-      required:
-      - user
-      - platform[]
-      - photos[]
-      - title
-      properties:
-        user:
-          type: string
-          description: Username of the profile to publish on behalf of.
-        platform[]:
-          type: array
-          items:
-            $ref: '#/components/schemas/Platform'
-          description: One or more target platforms.
-        photos[]:
-          type: array
-          items:
-            type: string
-            format: binary
-          description: One or more image files or publicly accessible image URLs.
-        title:
-          type: string
-          description: Title of the photo post.
-        description:
-          type: string
-          description: Body text/description for the post.
     Platform:
       type: string
       description: Target social platform.
@@ -147,6 +101,17 @@ components:
       - discord
       - telegram
       - google-business
+    UploadResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+        request_id:
+          type: string
+          description: Present for asynchronous uploads.
+        results:
+          type: object
+          description: Per-platform publishing results.
     UploadVideoRequest:
       type: object
       required:
@@ -195,6 +160,41 @@ components:
         title:
           type: string
           description: Text content of the post.
+    UploadPhotosRequest:
+      type: object
+      required:
+      - user
+      - platform[]
+      - photos[]
+      - title
+      properties:
+        user:
+          type: string
+          description: Username of the profile to publish on behalf of.
+        platform[]:
+          type: array
+          items:
+            $ref: '#/components/schemas/Platform'
+          description: One or more target platforms.
+        photos[]:
+          type: array
+          items:
+            type: string
+            format: binary
+          description: One or more image files or publicly accessible image URLs.
+        title:
+          type: string
+          description: Title of the photo post.
+        description:
+          type: string
+          description: Body text/description for the post.
+    Error:
+      type: object
+      properties:
+        success:
+          type: boolean
+        error:
+          type: string
   responses:
     Unauthorized:
       description: Missing or invalid API key.

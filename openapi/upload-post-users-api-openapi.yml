@@ -152,62 +152,6 @@ paths:
           $ref: '#/components/responses/Unauthorized'
 components:
   schemas:
-    GenerateJwtResponse:
-      type: object
-      properties:
-        access_url:
-          type: string
-          description: Single-use URL the end user visits to link accounts.
-    Error:
-      type: object
-      properties:
-        success:
-          type: boolean
-        error:
-          type: string
-    UserProfile:
-      type: object
-      properties:
-        username:
-          type: string
-        social_accounts:
-          type: object
-          description: Connected social accounts for the profile.
-        created_at:
-          type: string
-          format: date-time
-    CreateUserRequest:
-      type: object
-      required:
-      - username
-      properties:
-        username:
-          type: string
-          description: Unique identifier for the user profile.
-    Platform:
-      type: string
-      description: Target social platform.
-      enum:
-      - tiktok
-      - instagram
-      - youtube
-      - linkedin
-      - facebook
-      - x
-      - threads
-      - pinterest
-      - bluesky
-      - reddit
-      - discord
-      - telegram
-      - google-business
-    UserProfileList:
-      type: object
-      properties:
-        profiles:
-          type: array
-          items:
-            $ref: '#/components/schemas/UserProfile'
     GenerateJwtRequest:
       type: object
       required:
@@ -230,6 +174,47 @@ components:
         language:
           type: string
           description: Language of the linking page.
+    Platform:
+      type: string
+      description: Target social platform.
+      enum:
+      - tiktok
+      - instagram
+      - youtube
+      - linkedin
+      - facebook
+      - x
+      - threads
+      - pinterest
+      - bluesky
+      - reddit
+      - discord
+      - telegram
+      - google-business
+    UserProfile:
+      type: object
+      properties:
+        username:
+          type: string
+        social_accounts:
+          type: object
+          description: Connected social accounts for the profile.
+        created_at:
+          type: string
+          format: date-time
+    GenerateJwtResponse:
+      type: object
+      properties:
+        access_url:
+          type: string
+          description: Single-use URL the end user visits to link accounts.
+    UserProfileList:
+      type: object
+      properties:
+        profiles:
+          type: array
+          items:
+            $ref: '#/components/schemas/UserProfile'
     DeleteUserRequest:
       type: object
       required:
@@ -238,6 +223,21 @@ components:
         username:
           type: string
           description: Username of the profile to remove.
+    CreateUserRequest:
+      type: object
+      required:
+      - username
+      properties:
+        username:
+          type: string
+          description: Unique identifier for the user profile.
+    Error:
+      type: object
+      properties:
+        success:
+          type: boolean
+        error:
+          type: string
   responses:
     Unauthorized:
       description: Missing or invalid API key.
