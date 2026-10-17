@@ -160,6 +160,13 @@ components:
         title:
           type: string
           description: Text content of the post.
+    Error:
+      type: object
+      properties:
+        success:
+          type: boolean
+        error:
+          type: string
     UploadPhotosRequest:
       type: object
       required:
@@ -188,13 +195,6 @@ components:
         description:
           type: string
           description: Body text/description for the post.
-    Error:
-      type: object
-      properties:
-        success:
-          type: boolean
-        error:
-          type: string
   responses:
     Unauthorized:
       description: Missing or invalid API key.
