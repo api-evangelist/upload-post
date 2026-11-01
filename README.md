@@ -1,4 +1,4 @@
-# Upload-Post (upload-post)
+# Upload-Post
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -66,139 +66,131 @@
 
 Upload-Post is a universal social media publishing API that lets developers publish videos, photos, and text posts to TikTok, Instagram, YouTube, LinkedIn, Facebook, X (Twitter), Threads, Pinterest, Bluesky, Reddit, Discord, Telegram, and Google Business Profile through a single REST interface, with managed user profiles, OAuth account linking, scheduling, and cross-platform analytics.
 
-**APIs.json:** [https://raw.githubusercontent.com/api-evangelist/upload-post/refs/heads/main/apis.yml](https://raw.githubusercontent.com/api-evangelist/upload-post/refs/heads/main/apis.yml)
+**Areas:** Social Media · Publishing · Video · Content · Cross Posting
 
-## Tags
+## Upload-Post on APIs.io
 
-- Social Media
-- Publishing
-- Video
-- Content
-- Cross Posting
+Everything profiled for Upload-Post is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/upload-post/](https://apis.io/providers/upload-post/)** — or go straight to one of the APIs or properties below.
 
-## Timestamps
+### APIs (4)
 
-- **Created:** 2026-06-25
-- **Modified:** 2026-06-25
+- [Upload-Post Analytics API](https://apis.io/apis/upload-post/upload-post-analytics-api/) — Retrieve impressions and per-post performance metrics.
+- [Upload-Post Upload API](https://apis.io/apis/upload-post/upload-post-upload-api/) — Publish video, photo, and text content to social platforms.
+- [Upload-Post Upload Management API](https://apis.io/apis/upload-post/upload-post-upload-management-api/) — Check upload status and retrieve upload history.
+- [Upload-Post Users API](https://apis.io/apis/upload-post/upload-post-users-api/) — Manage user profiles and social account linking.
 
-## APIs
+### Published properties
 
-### Upload-Post Upload Video API
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-Publishes video posts to TikTok, Instagram, YouTube, LinkedIn, Facebook, X (Twitter), Threads, Pinterest, Bluesky, Reddit, Discord, and Telegram via a single multipart upload, with synchronous and asynchronous (request_id) modes and scheduling.
+#### MCP servers (1)
 
-- **Human URL:** [https://docs.upload-post.com/api/reference/](https://docs.upload-post.com/api/reference/)
-- **Base URL:** `https://api.upload-post.com/api`
+Model Context Protocol servers that expose the API to agents.
 
-#### Tags
+- [upload-post](https://apis.io/servers/upload-post/upload-post/)
 
-- Video
-- Publishing
-- Social Media
+#### Agentic access (1)
 
-#### Properties
+Which operations an agent can call, which act, and which need a human in the loop.
 
-- [Documentation](https://docs.upload-post.com/)
-- [API Reference](https://docs.upload-post.com/api/reference/)
-- [OpenAPI](openapi/upload-post-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/upload-post.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/upload-post.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+- [Upload Post Agentic Access](https://apis.io/agentic-access/upload-post/upload-post-agentic-access/)
 
-### Upload-Post Upload Photos API
+#### Collections (5)
 
-Publishes single photos and image carousels to Instagram, LinkedIn, Facebook, X (Twitter), TikTok, Threads, Pinterest, and Bluesky using multipart photos[] uploads with title and description fields.
+Postman and Open Collection request collections.
 
-- **Human URL:** [https://docs.upload-post.com/api/reference/](https://docs.upload-post.com/api/reference/)
-- **Base URL:** `https://api.upload-post.com/api`
+- [Upload-Post API](https://apis.io/collections/upload-post/open-upload-post/)
+- [Upload-Post Analytics API](https://apis.io/collections/upload-post/open-upload-post-analytics-api/)
+- [Post Analytics Upload API](https://apis.io/collections/upload-post/open-upload-post-upload-api/)
+- [Upload-Post Analytics Upload Management API](https://apis.io/collections/upload-post/open-upload-post-upload-management-api/)
+- [Upload-Post Analytics Users API](https://apis.io/collections/upload-post/open-upload-post-users-api/)
 
-#### Tags
+#### Security (2)
 
-- Photos
-- Carousel
-- Publishing
+Authentication, trust centre, and vulnerability disclosure.
 
-#### Properties
+- [Upload Post Authentication](https://apis.io/security/upload-post/upload-post-authentication/)
+- [Upload Post Domain Security](https://apis.io/security/upload-post/upload-post-domain-security/)
 
-- [Documentation](https://docs.upload-post.com/)
-- [API Reference](https://docs.upload-post.com/api/reference/)
-- [OpenAPI](openapi/upload-post-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/upload-post.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/upload-post.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+#### Plans and pricing (2)
 
-### Upload-Post Upload Text API
+Published plans, tiers and prices.
 
-Creates and distributes text-only posts across supported social platforms such as X (Twitter), Threads, LinkedIn, Facebook, and Bluesky.
+- [Upload Post Plans Pricing](https://apis.io/plans/upload-post/upload-post-plans-pricing/)
+- [Upload Post Price Estimates](https://apis.io/plans/upload-post/upload-post-price-estimates/)
 
-- **Human URL:** [https://docs.upload-post.com/api/reference/](https://docs.upload-post.com/api/reference/)
-- **Base URL:** `https://api.upload-post.com/api`
+#### Rate limits (1)
 
-#### Tags
+Published request limits.
 
-- Text
-- Publishing
-- Social Media
+- [Upload Post Rate Limits](https://apis.io/rate-limits/upload-post/upload-post-rate-limits/)
 
-#### Properties
+#### FinOps (1)
 
-- [Documentation](https://docs.upload-post.com/)
-- [API Reference](https://docs.upload-post.com/api/reference/)
-- [OpenAPI](openapi/upload-post-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/upload-post.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/upload-post.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+What the API costs to run, by operation.
 
-### Upload-Post Profiles and Users API
+- [Upload Post Finops](https://apis.io/finops/upload-post/upload-post-finops/)
 
-Creates, lists, and deletes managed user profiles, generates single-use JWT URLs for end users to link their own social accounts, and validates those tokens.
+## Where to find this API
 
-- **Human URL:** [https://docs.upload-post.com/api/user-profiles/](https://docs.upload-post.com/api/user-profiles/)
-- **Base URL:** `https://api.upload-post.com/api`
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
 
-#### Tags
-
-- Users
-- Profiles
-- OAuth
-
-#### Properties
-
-- [Documentation](https://docs.upload-post.com/api/user-profiles/)
-- [API Reference](https://docs.upload-post.com/api/reference/)
-- [OpenAPI](openapi/upload-post-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/upload-post.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/upload-post.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-### Upload-Post Analytics API
-
-Retrieves per-profile performance metrics, aggregated total impressions across platforms, and per-post analytics by request_id or platform post ID.
-
-- **Human URL:** [https://docs.upload-post.com/api/reference/](https://docs.upload-post.com/api/reference/)
-- **Base URL:** `https://api.upload-post.com/api`
-
-#### Tags
-
-- Analytics
-- Impressions
-- Metrics
-
-#### Properties
-
-- [Documentation](https://docs.upload-post.com/)
-- [API Reference](https://docs.upload-post.com/api/reference/)
-- [OpenAPI](openapi/upload-post-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/upload-post.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/upload-post.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-## Common Properties
-
-- [GitHub Organization](https://github.com/Upload-Post)
-- [LinkedIn](https://www.linkedin.com/company/upload-post)
 - [Website](https://www.upload-post.com/)
 - [Documentation](https://docs.upload-post.com/)
-- [Plans](plans/upload-post-plans-pricing.yml)
-- [Rate Limits](rate-limits/upload-post-rate-limits.yml)
-- [Fin Ops](finops/upload-post-finops.yml)
+- [Pricing](https://www.upload-post.com/)
+- [GitHub](https://github.com/Upload-Post)
 
-## Maintainers
+## API Evangelist rating
 
-**FN:** Kin Lane
-**Email:** kin@apievangelist.com
+**Kin Score 37.2** — thin · rubric 0.25.0 · scored 2026-10-23
+
+| Facet | Score |
+|---|---|
+| Discoverability | 68.3 |
+| Contract quality | 51.1 |
+| Contract governance | 0.0 |
+| Operational transparency | 34.2 |
+| Developer ergonomics | 29.8 |
+| Access clarity | 42.1 |
+
+**Agent readiness 45.8** — agent-ready (gated down from agent-native)
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | derived (partial credit) |
+| Reversibility Documented | — |
+| MCP Server | verified |
+| Auth Clarity | served (partial credit) |
+| Idempotency | — |
+| Error Semantics | — |
+| OpenAPI Examples | — |
+| Rate Limit Signal | documented (partial credit) |
+| Event Surface Described | — |
+| Agent Skills | — |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | served (partial credit) |
+| Protected Resource Metadata | verified |
+| Dynamic Client Registration | yes |
+| Agentic Commerce | — |
+| Pagination Ratio | na |
+| Operation Distinctiveness | distinct |
+
+**Regulatory alignment 11.8** — Horizontal (data, software, accessibility, platform)
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/upload-post/](https://apis.io/providers/upload-post/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Upload-Post: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/upload-post/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
